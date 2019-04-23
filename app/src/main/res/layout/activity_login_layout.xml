@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
     android:background="@color/colorAccent"
     android:orientation="vertical"
-    >
+    tools:context=".LoginActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -21,52 +20,52 @@
             android:orientation="vertical">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="bottom"
-        android:orientation="horizontal"
-        android:background="#FF007F"
-        android:weightSum="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#FF007F"
+                android:gravity="bottom"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2"
-            android:gravity="center">
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center">
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@drawable/phone_call"/>
-        </RelativeLayout>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/phone_call" />
+                </RelativeLayout>
 
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.8"
-            android:layout_marginLeft="5dp"
-            android:background="@null"
-            android:hint="Mobile No"
-            android:layout_gravity="center"
-            android:textColorHint="#ffffff"
-            android:focusableInTouchMode="true"/>
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.8"
+                    android:background="@null"
+                    android:focusableInTouchMode="true"
+                    android:hint="Mobile No"
+                    android:textColorHint="#ffffff" />
 
-    </LinearLayout>
+            </LinearLayout>
 
 
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/rectangle"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="40dp"
-        android:text="Login"
-        android:gravity="center"
-        android:textColor="#ffffff"
-        android:textSize="18dp"/>
+            <TextView
+                android:id="@+id/login_tv"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/rectangle"
+                android:gravity="center"
+                android:text="Login"
+                android:textColor="#ffffff"
+                android:textSize="18dp" />
 
         </LinearLayout>
 
