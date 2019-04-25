@@ -4,19 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DashBoardActivity"
+    tools:context=".activity.DashBoardActivity"
+    android:id="@+id/container"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        android:id="@+id/toolbar"
+        app:titleTextColor="@color/white">
     </android.support.v7.widget.Toolbar>
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:weightSum="1"
+        android:orientation="vertical">
+
+
+    <FrameLayout android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.9"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
         android:gravity="bottom"
         android:orientation="vertical">
 
@@ -27,7 +42,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
             android:weightSum="1">
 
@@ -38,7 +53,8 @@
                 android:text="Explore"
                 android:gravity="center"
                 android:textColor="#000000"
-                android:textSize="12dp"/>
+                android:textSize="12dp"
+                android:id="@+id/explore_tv"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -47,17 +63,40 @@
                 android:text="Inbox"
                 android:gravity="center"
                 android:textColor="#000000"
-                android:textSize="12dp"/>
+                android:textSize="12dp"
+                android:id="@+id/inbox_tv"/>e
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2">
 
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.2"
                 android:text="Notification"
                 android:gravity="center"
                 android:textColor="#000000"
-                android:textSize="12dp"/>
+                android:textSize="12dp"
+                android:id="@+id/notification_tv"/>
+
+
+                <TextView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:background="@drawable/circular_red_filled"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="3dp"
+                    android:text="10"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="12dp"/>
+
+
+
+            </RelativeLayout>
 
 
             <TextView
@@ -67,7 +106,8 @@
                 android:text="Interest"
                 android:gravity="center"
                 android:textColor="#000000"
-                android:textSize="12dp"/>
+                android:textSize="12dp"
+                android:id="@+id/interest_tv"/>
 
 
             <TextView
@@ -77,8 +117,12 @@
                 android:text="More"
                 android:gravity="center"
                 android:textColor="#000000"
-                android:textSize="12dp"/>
+                android:textSize="12dp"
+                android:id="@+id/more_tv"/>
         </LinearLayout>
+
+
+    </LinearLayout>
 
 
 
