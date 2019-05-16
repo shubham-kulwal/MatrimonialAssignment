@@ -1,1 +1,3 @@
 include ':app'
+include ':accl'
+project(':accl').projectDir = new File('/home/user/FigmdProjects/CommonLibs/accl_lib/accl')

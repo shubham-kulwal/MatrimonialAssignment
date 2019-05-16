@@ -1,24 +1,29 @@
 package matrimonial.assignment.com.matrimonialassignment.activity;
 
+import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
-
 import matrimonial.assignment.com.matrimonialassignment.R;
-import matrimonial.assignment.com.matrimonialassignment.fragments.ExploreFragment;
+import matrimonial.assignment.com.matrimonialassignment.baseClasses.BaseActivity;
+import matrimonial.assignment.com.matrimonialassignment.exploreModule.view.ExploreFragment;
 import matrimonial.assignment.com.matrimonialassignment.fragments.InboxFragment;
 import matrimonial.assignment.com.matrimonialassignment.fragments.InterestFragment;
 import matrimonial.assignment.com.matrimonialassignment.fragments.MoreFragment;
 import matrimonial.assignment.com.matrimonialassignment.fragments.NotificationFragment;
+import matrimonial.assignment.com.matrimonialassignment.loginModule.view.LoginActivity;
+import matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager;
+import matrimonial.assignment.com.matrimonialassignment.utils.CommonMethods;
 
-public class DashBoardActivity extends AppCompatActivity implements View.OnClickListener {
+public class DashBoardActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView explore_tv, inbox_tv, notification_tv, interest_tv, more_tv;
+    private ImageView logout_iv;
     private ExploreFragment exploreFragment;
     private InboxFragment inboxFragment;
     private InterestFragment interestFragment;
@@ -37,6 +42,7 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
     private void init() {
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Explore");
+        logout_iv = findViewById(R.id.logout_iv);
         explore_tv = findViewById(R.id.explore_tv);
         inbox_tv = findViewById(R.id.inbox_tv);
         notification_tv = findViewById(R.id.notification_tv);
@@ -47,6 +53,7 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
         inbox_tv.setOnClickListener(this);
         notification_tv.setOnClickListener(this);
         more_tv.setOnClickListener(this);
+        logout_iv.setOnClickListener(this);
         exploreFragment = new ExploreFragment();
         inboxFragment = new InboxFragment();
         interestFragment = new InterestFragment();
@@ -127,7 +134,27 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
                 interest_tv.setTextColor(getResources().getColor(R.color.black));
                 loadFragment(moreFragment);
                 break;
+
+            case R.id.logout_iv:
+                showLogoutDialog();
+                break;
         }
+    }
+
+    private void showLogoutDialog() {
+        CommonMethods.showDialog(this, "Are you sure, you want to logout?", "SignOut", "Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SharedPrefManager.writeInt(SharedPrefManager.NAVIGATION_VALUE, 0);
+                callActivity(DashBoardActivity.this, LoginActivity.class);
+                finish();
+            }
+        }, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        },false);
     }
 
     private boolean loadFragment(Fragment fragment) {
@@ -156,5 +183,11 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
         interest_tv.setTextColor(getResources().getColor(R.color.black));
         more_tv.setTextColor(getResources().getColor(R.color.black));
         loadFragment(exploreFragment);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
     }
 }

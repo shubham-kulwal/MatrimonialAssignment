@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="matrimonial.assignment.com.matrimonialassignment.registrationModule.viewModel.RegistrationViewModel" />
+    </data>
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".registrationModule.view.RegistrationActivity">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            app:titleTextColor="@color/white" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Name:"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_rectangle_grey_color">
+
+                    <EditText
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:afterTextChanged="@{(editable)->viewModel.setName(editable)}"
+                        android:background="@null"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Middle Name:"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_rectangle_grey_color">
+
+
+                    <EditText
+                        android:id="@+id/middleName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:afterTextChanged="@{(editable)->viewModel.setMiddleName(editable)}"
+                        android:background="@null"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Last Name:"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_rectangle_grey_color">
+
+
+                    <EditText
+                        android:id="@+id/lastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:afterTextChanged="@{(editable)->viewModel.setLastName(editable)}"
+                        android:background="@null"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Gender:"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18dp" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onCheckedChanged="@{viewModel.onCheckChanged}"
+                    android:orientation="horizontal"
+                    android:singleLine="true"
+                    android:textColor="@color/black">
+
+                    <RadioButton
+                        android:id="@+id/male"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="Male"
+                        android:textColor="@color/black" />
+
+                    <RadioButton
+                        android:id="@+id/female"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="Female"
+                        android:textColor="@color/black" />
+                </RadioGroup>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Email:"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_rectangle_grey_color">
+
+
+                    <EditText
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:afterTextChanged="@{(editable)->viewModel.setEmail(editable)}"
+                        android:background="@null"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Password:"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_rectangle_grey_color">
+
+
+                    <EditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:afterTextChanged="@{(editable)->viewModel.setPassword(editable)}"
+                        android:background="@null"
+                        android:inputType="textPassword"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Confirm Password:"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_rectangle_grey_color">
+
+
+                    <EditText
+                        android:id="@+id/confirmPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:afterTextChanged="@{(editable)->viewModel.setConfirmPassword(editable)}"
+                        android:background="@null"
+                        android:inputType="textPassword"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mobile:"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_rectangle_grey_color">
+
+
+                    <EditText
+                        android:id="@+id/mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:afterTextChanged="@{(editable)->viewModel.setMobile(editable)}"
+                        android:background="@null"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:maxLength="10"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:gravity="center"
+                    android:text="Register"
+                    android:textColor="@color/white"
+                    bind:callActivity="@{viewModel.callActivity}"
+                    bind:toastMessage="@{viewModel.toastMessage}"
+                    android:onClick="@{()-> viewModel.onRegisterClick()}"/>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</layout>

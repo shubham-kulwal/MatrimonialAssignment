@@ -16,7 +16,6 @@ import java.util.List;
 
 import matrimonial.assignment.com.matrimonialassignment.R;
 import matrimonial.assignment.com.matrimonialassignment.adapter.ListAdapter;
-import matrimonial.assignment.com.matrimonialassignment.dtos.Person;
 
 public class InterestFragment extends Fragment {
 
@@ -33,24 +32,10 @@ public class InterestFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        ListAdapter mAdapter = new ListAdapter(getPersonList());
+      /*  ListAdapter mAdapter = new ListAdapter(getPersonList());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
-    }
-
-    private List<Person> getPersonList() {
-        List<Person> personList = new ArrayList<>();
-        for (int i=0; i<=10; i++){
-            Person person=new Person();
-            person.setName("Pandurang Kumbhar");
-            person.setAge(24);
-            person.setMobile("9999999999");
-            person.setAddress("Baner, Pune");
-            person.setDateOfBirth("10-01-1995");
-            personList.add(person);
-        }
-        return personList;
+        recyclerView.setAdapter(mAdapter);*/
     }
 }

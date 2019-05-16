@@ -33,6 +33,7 @@
         android:textSize="14dp"
         android:gravity="center"
         android:layout_margin="5dp"
+        android:id="@+id/register"
         android:background="@drawable/rounded_rectangle_filled"/>
 
     <TextView

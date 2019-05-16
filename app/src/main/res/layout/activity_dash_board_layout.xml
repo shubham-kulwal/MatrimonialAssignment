@@ -2,129 +2,144 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.DashBoardActivity"
-    android:id="@+id/container"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".activity.DashBoardActivity">
 
-    <android.support.v7.widget.Toolbar
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:id="@+id/toolbar"
-        app:titleTextColor="@color/white">
-    </android.support.v7.widget.Toolbar>
+        android:layout_height="?attr/actionBarSize">
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            app:titleTextColor="@color/white" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/logout_iv"
+                android:src="@drawable/ic_logout_512"
+                android:layout_alignParentRight="true"
+                android:layout_margin="10dp"/>
+
+    </RelativeLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="1">
 
 
-    <FrameLayout android:id="@+id/content_frame"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.9"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1"
-        android:gravity="bottom"
-        android:orientation="vertical">
-
-        <View
+        <FrameLayout
+            android:id="@+id/content_frame"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#000000"></View>
+            android:layout_height="0dp"
+            android:layout_weight="0.9" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:gravity="bottom"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2"
-                android:text="Explore"
-                android:gravity="center"
-                android:textColor="#000000"
-                android:textSize="12dp"
-                android:id="@+id/explore_tv"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#000000"></View>
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2"
-                android:text="Inbox"
-                android:gravity="center"
-                android:textColor="#000000"
-                android:textSize="12dp"
-                android:id="@+id/inbox_tv"/>e
-
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2">
-
-
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Notification"
-                android:gravity="center"
-                android:textColor="#000000"
-                android:textSize="12dp"
-                android:id="@+id/notification_tv"/>
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/explore_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="Explore"
+                    android:textColor="#000000"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/inbox_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="Inbox"
+                    android:textColor="#000000"
+                    android:textSize="12dp" />e
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2">
+
+
+                    <TextView
+                        android:id="@+id/notification_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Notification"
+                        android:textColor="#000000"
+                        android:textSize="12dp" />
+
+
+                    <TextView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="3dp"
+                        android:background="@drawable/circular_red_filled"
+                        android:gravity="center"
+                        android:text="10"
+                        android:textColor="@color/white"
+                        android:textSize="12dp" />
+
+
+                </RelativeLayout>
 
 
                 <TextView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:background="@drawable/circular_red_filled"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="3dp"
-                    android:text="10"
+                    android:id="@+id/interest_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
                     android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="12dp"/>
+                    android:text="Interest"
+                    android:textColor="#000000"
+                    android:textSize="12dp" />
 
 
-
-            </RelativeLayout>
-
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2"
-                android:text="Interest"
-                android:gravity="center"
-                android:textColor="#000000"
-                android:textSize="12dp"
-                android:id="@+id/interest_tv"/>
+                <TextView
+                    android:id="@+id/more_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="More"
+                    android:textColor="#000000"
+                    android:textSize="12dp" />
+            </LinearLayout>
 
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2"
-                android:text="More"
-                android:gravity="center"
-                android:textColor="#000000"
-                android:textSize="12dp"
-                android:id="@+id/more_tv"/>
         </LinearLayout>
-
-
-    </LinearLayout>
-
-
 
 
     </LinearLayout>
