@@ -1,7 +1,12 @@
 package matrimonial.assignment.com.matrimonialassignment.serviceDtos.searchUser.response;
 
-public class DataResponse {
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
+@Entity(tableName = "users")
+public class DataResponse {
+    @PrimaryKey
+    private int UserId;
     private int IsManglik;
     private int Jobdata;
     private String NoOfMBro = null;
@@ -16,7 +21,6 @@ public class DataResponse {
     private boolean IsAdhaarVerified;
     private String DegreeName;
     private String Height;
-    private int UserId;
     private String FirstName;
     private String MName;
     private String LName;
@@ -99,6 +103,15 @@ public class DataResponse {
     private String BehalfOf;
     private String IsSpec = null;
     private int TotalRecords;
+    private int favourite;
+
+    public int isFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(int favourite) {
+        this.favourite = favourite;
+    }
 
     public int getIsManglik() {
         return IsManglik;

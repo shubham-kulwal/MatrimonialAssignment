@@ -105,12 +105,8 @@ public class RegistrationViewModel extends BaseViewModel {
             return false;
         }
 
-        if (isEmpty(registrationModel.getEmail())){
-            setToastMessage("Please Enter Email");
-            return false;
-        }
 
-        if (!isValidEmail(registrationModel.getEmail())){
+        if (!isEmpty(registrationModel.getEmail()) && !isValidEmail(registrationModel.getEmail())){
             setToastMessage("Please Valid Email");
             return false;
         }

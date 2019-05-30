@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -27,6 +28,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         TextView name, dob, age, contact, address;
         CircleImageView profile_image;
         CardView cardLayout;
+        ImageView favourite_iv;
 
         public MyViewHolder(View view) {
             super(view);
@@ -37,6 +39,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
             address = (TextView) view.findViewById(R.id.address);
             profile_image = (CircleImageView) view.findViewById(R.id.profile_image);
             cardLayout = view.findViewById(R.id.cardLayout);
+            favourite_iv = view.findViewById(R.id.favourite_iv);
         }
     }
 
@@ -56,13 +59,21 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final DataResponse dataResp = dataResponse.get(position);
         holder.name.setText("Name: " + dataResp.getFirstName() + " " + dataResp.getMName() + " " + dataResp.getLName());
         holder.contact.setText("Contact: " + dataResp.getMobileNo());
         holder.age.setText("Age: " + dataResp.getAge() + "");
         //  holder.dob.setText("Birth Date: "+dataResp.getDateOfBirth());
         holder.address.setText("Address: " + dataResp.getAddress());
+
+
+            if (dataResponse.get(position).isFavourite() == 1) {
+                holder.favourite_iv.setBackground(context.getResources().getDrawable(R.drawable.heart_red));
+            } else {
+                holder.favourite_iv.setBackground(context.getResources().getDrawable(R.drawable.heart_white));
+            }
+
         Glide.with(context).load(dataResp.getImg1()).into(holder.profile_image);
         holder.cardLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,10 +81,30 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                 onItemClickListener.onClick(dataResponse.get(position));
             }
         });
+
+        holder.favourite_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (dataResponse.get(position).isFavourite() == 0) {
+                    holder.favourite_iv.setTag("Favourite");
+                } else {
+                    holder.favourite_iv.setTag("Unfavourite");
+                }
+                onItemClickListener.onMarkAsFavouriteClick(dataResponse.get(position), v.getTag().toString(),position);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return dataResponse.size();
+    }
+
+    public List<DataResponse> getDataResponse(){
+        return dataResponse;
+    }
+
+    public void setDataResponse(List<DataResponse> dataResponse){
+         this.dataResponse=dataResponse;
     }
 }

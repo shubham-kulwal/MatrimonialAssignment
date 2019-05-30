@@ -9,6 +9,20 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        // used by Room, to test migrations
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation":
+                                     "$projectDir/schemas".toString()]
+            }
+        }
+        // used by Room, to test migrations
+        sourceSets {
+            androidTest.assets.srcDirs +=
+                    files("$projectDir/schemas".toString())
+        }
+
     }
     buildTypes {
         release {
@@ -41,5 +55,9 @@ dependencies {
     compile project(path: ':accl')
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'com.google.code.gson:gson:2.8.1'
+    implementation 'android.arch.persistence.room:runtime:1.0.0-alpha4'
+    annotationProcessor 'android.arch.persistence.room:compiler:1.0.0-alpha4'
+    androidTestImplementation 'android.arch.persistence.room:testing:1.0.0-alpha4'
 
 }

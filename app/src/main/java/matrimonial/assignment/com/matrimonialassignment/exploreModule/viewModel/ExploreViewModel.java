@@ -5,14 +5,18 @@ import android.arch.lifecycle.MutableLiveData;
 import java.util.List;
 
 import matrimonial.assignment.com.matrimonialassignment.baseClasses.BaseViewModel;
+import matrimonial.assignment.com.matrimonialassignment.callbacks.OnItemClickListener;
 import matrimonial.assignment.com.matrimonialassignment.exploreModule.model.ExploreModel;
 import matrimonial.assignment.com.matrimonialassignment.service.SearchUserApiService;
 import matrimonial.assignment.com.matrimonialassignment.serviceDtos.Result;
 import matrimonial.assignment.com.matrimonialassignment.serviceDtos.searchUser.response.DataResponse;
 import matrimonial.assignment.com.matrimonialassignment.serviceDtos.searchUser.response.SearchUserResponseObj;
 import matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager;
+import matrimonial.assignment.com.matrimonialassignment.userDetailsModule.view.UserDetailsActivity;
 import savysoft.accl.retrofit.RetrofitHeaders;
 
+import static matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager.USER_ID;
+import static matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager.readInt;
 import static matrimonial.assignment.com.matrimonialassignment.utils.Constants.ProgressDialog.SHOW_PROGRESS_DIALOG;
 
 public class ExploreViewModel extends BaseViewModel {
@@ -20,6 +24,7 @@ public class ExploreViewModel extends BaseViewModel {
     private ExploreModel exploreModel;
     private SearchUserApiService searchUserApiService;
     private final int SEARCH_USER_LIST = 1;
+    private final int SHORTLIST_USER_LIST = 2;
     private MutableLiveData<List<DataResponse>> dataResponseMutableLiveData;
 
     public ExploreViewModel() {
@@ -36,11 +41,19 @@ public class ExploreViewModel extends BaseViewModel {
         callSearchUsersApi();
     }
 
+    public void callShortlistUser(){
+        observeApiResult(searchUserApiService);
+        setProgressDialog(SHOW_PROGRESS_DIALOG);
+        exploreModel.setServiceID(SHORTLIST_USER_LIST);
+        exploreModel.setRequestedID(readInt(USER_ID));
+        searchUserApiService.callShortListUserApi(exploreModel);
+    }
+
     private void callSearchUsersApi() {
         observeApiResult(searchUserApiService);
         setProgressDialog(SHOW_PROGRESS_DIALOG);
         exploreModel.setServiceID(SEARCH_USER_LIST);
-        exploreModel.setRequestedID(SharedPrefManager.readInt(SharedPrefManager.USER_ID));
+        exploreModel.setRequestedID(readInt(USER_ID));
         searchUserApiService.callSearchUserApi(exploreModel);
     }
     public MutableLiveData<List<DataResponse>> getDataResponseMutableLiveData(){

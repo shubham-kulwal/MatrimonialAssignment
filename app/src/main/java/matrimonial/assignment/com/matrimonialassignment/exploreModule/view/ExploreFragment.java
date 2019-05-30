@@ -1,6 +1,7 @@
 package matrimonial.assignment.com.matrimonialassignment.exploreModule.view;
 
 import android.arch.lifecycle.Observer;
+import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import matrimonial.assignment.com.matrimonialassignment.R;
@@ -22,6 +24,7 @@ import matrimonial.assignment.com.matrimonialassignment.databinding.FragmentExpl
 import matrimonial.assignment.com.matrimonialassignment.exploreModule.viewModel.ExploreViewModel;
 import matrimonial.assignment.com.matrimonialassignment.serviceDtos.searchUser.response.DataResponse;
 import matrimonial.assignment.com.matrimonialassignment.userDetailsModule.view.UserDetailsActivity;
+import matrimonial.assignment.com.matrimonialassignment.utils.CommonMethods;
 
 import static matrimonial.assignment.com.matrimonialassignment.utils.Constants.ProgressDialog.DISMISS_PROGRESS_DIALOG;
 
@@ -29,6 +32,7 @@ public class ExploreFragment extends BaseFragment {
 
     private FragmentExploreLayoutBinding fragmentExploreLayoutBinding;
     public static DataResponse dataResponse;
+    private ListAdapter mAdapter;
 
 
     @Nullable
@@ -58,7 +62,7 @@ public class ExploreFragment extends BaseFragment {
         fragmentExploreLayoutBinding.getViewModel().getDataResponseMutableLiveData().observe(this, new Observer<List<DataResponse>>() {
             @Override
             public void onChanged(@Nullable List<DataResponse> dataResponses) {
-                ListAdapter mAdapter = new ListAdapter(getContext(), dataResponses,onItemClickListener);
+                mAdapter = new ListAdapter(getContext(), dataResponses, onItemClickListener);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
                 fragmentExploreLayoutBinding.recyclerView.setLayoutManager(mLayoutManager);
                 fragmentExploreLayoutBinding.recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -77,6 +81,33 @@ public class ExploreFragment extends BaseFragment {
         public void onClick(DataResponse dataResp) {
             dataResponse = dataResp;
             callActivity(getContext(), UserDetailsActivity.class);
+        }
+
+        @Override
+        public void onMarkAsFavouriteClick(DataResponse dataResp, final String tag, final int position) {
+            String message = "Are you sure, you want to mark this user as " + tag;
+            CommonMethods.showDialog(getActivity(), message, "YES", "CANCEL", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    List<DataResponse> dataResponse =new ArrayList<>();
+                    if (mAdapter!=null) {
+                        dataResponse.addAll(mAdapter.getDataResponse());
+                        if (tag == "unfavourite") {
+                            dataResponse.get(position).setFavourite(0);
+                        }else {
+                            dataResponse.get(position).setFavourite(1);
+                        }
+                        mAdapter.setDataResponse(dataResponse);
+                        mAdapter.notifyDataSetChanged();
+                        fragmentExploreLayoutBinding.getViewModel().callShortlistUser();
+                    }
+                }
+            }, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            },false);
         }
     };
 

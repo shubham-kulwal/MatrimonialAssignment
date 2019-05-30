@@ -10,13 +10,13 @@ public class ExploreModel {
     private int serviceID;
     private int PageNo;
     private String PageSize;
-    private int requestedID;
+    private Integer requestedID;
 
-    public int getRequestedID() {
+    public Integer getRequestedID() {
         return requestedID;
     }
 
-    public void setRequestedID(int requestedID) {
+    public void setRequestedID(Integer requestedID) {
         this.requestedID = requestedID;
     }
 

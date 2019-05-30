@@ -8,6 +8,8 @@ import matrimonial.assignment.com.matrimonialassignment.baseClasses.BaseViewMode
 import matrimonial.assignment.com.matrimonialassignment.serviceDtos.Result;
 import matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager;
 
+import static matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager.NAVIGATION_VALUE;
+import static matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager.readInt;
 import static matrimonial.assignment.com.matrimonialassignment.utils.Constants.FINISH;
 
 public class SplashScreenViewModel extends BaseViewModel {
@@ -16,7 +18,7 @@ public class SplashScreenViewModel extends BaseViewModel {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (SharedPrefManager.readInt(SharedPrefManager.NAVIGATION_VALUE)==1){
+                if (readInt(NAVIGATION_VALUE)==1){
                     setCallActivity(DashBoardActivity.class);
                     setFinishActivity(FINISH);
                 }else {

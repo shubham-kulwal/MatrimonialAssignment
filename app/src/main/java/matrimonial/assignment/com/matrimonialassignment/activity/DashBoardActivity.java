@@ -2,7 +2,6 @@ package matrimonial.assignment.com.matrimonialassignment.activity;
 
 import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -14,11 +13,15 @@ import matrimonial.assignment.com.matrimonialassignment.baseClasses.BaseActivity
 import matrimonial.assignment.com.matrimonialassignment.exploreModule.view.ExploreFragment;
 import matrimonial.assignment.com.matrimonialassignment.fragments.InboxFragment;
 import matrimonial.assignment.com.matrimonialassignment.fragments.InterestFragment;
-import matrimonial.assignment.com.matrimonialassignment.fragments.MoreFragment;
+import matrimonial.assignment.com.matrimonialassignment.profileModule.view.ProfileFragment;
 import matrimonial.assignment.com.matrimonialassignment.fragments.NotificationFragment;
 import matrimonial.assignment.com.matrimonialassignment.loginModule.view.LoginActivity;
 import matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager;
 import matrimonial.assignment.com.matrimonialassignment.utils.CommonMethods;
+
+import static matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager.NAVIGATION_VALUE;
+import static matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager.USER_ID;
+import static matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager.writeInt;
 
 public class DashBoardActivity extends BaseActivity implements View.OnClickListener {
 
@@ -27,7 +30,7 @@ public class DashBoardActivity extends BaseActivity implements View.OnClickListe
     private ExploreFragment exploreFragment;
     private InboxFragment inboxFragment;
     private InterestFragment interestFragment;
-    private MoreFragment moreFragment;
+    private ProfileFragment moreFragment;
     private NotificationFragment notificationFragment;
     private Toolbar toolbar;
 
@@ -47,7 +50,7 @@ public class DashBoardActivity extends BaseActivity implements View.OnClickListe
         inbox_tv = findViewById(R.id.inbox_tv);
         notification_tv = findViewById(R.id.notification_tv);
         interest_tv = findViewById(R.id.interest_tv);
-        more_tv = findViewById(R.id.more_tv);
+        more_tv = findViewById(R.id.profile_tv);
         explore_tv.setOnClickListener(this);
         interest_tv.setOnClickListener(this);
         inbox_tv.setOnClickListener(this);
@@ -57,7 +60,7 @@ public class DashBoardActivity extends BaseActivity implements View.OnClickListe
         exploreFragment = new ExploreFragment();
         inboxFragment = new InboxFragment();
         interestFragment = new InterestFragment();
-        moreFragment = new MoreFragment();
+        moreFragment = new ProfileFragment();
         notificationFragment = new NotificationFragment();
         loadExploreFragment();
     }
@@ -119,8 +122,8 @@ public class DashBoardActivity extends BaseActivity implements View.OnClickListe
                 loadFragment(interestFragment);
                 break;
 
-            case R.id.more_tv:
-                toolbar.setTitle("More");
+            case R.id.profile_tv:
+                toolbar.setTitle("Profile");
                 more_tv.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 explore_tv.setBackgroundColor(getResources().getColor(R.color.white));
                 inbox_tv.setBackgroundColor(getResources().getColor(R.color.white));
@@ -145,7 +148,8 @@ public class DashBoardActivity extends BaseActivity implements View.OnClickListe
         CommonMethods.showDialog(this, "Are you sure, you want to logout?", "SignOut", "Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                SharedPrefManager.writeInt(SharedPrefManager.NAVIGATION_VALUE, 0);
+                writeInt(NAVIGATION_VALUE, 0);
+                writeInt(USER_ID, 0);
                 callActivity(DashBoardActivity.this, LoginActivity.class);
                 finish();
             }

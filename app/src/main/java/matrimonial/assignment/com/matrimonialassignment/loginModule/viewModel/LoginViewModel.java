@@ -2,6 +2,8 @@ package matrimonial.assignment.com.matrimonialassignment.loginModule.viewModel;
 
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
+
 import matrimonial.assignment.com.matrimonialassignment.activity.DashBoardActivity;
 import matrimonial.assignment.com.matrimonialassignment.baseClasses.BaseViewModel;
 import matrimonial.assignment.com.matrimonialassignment.loginModule.model.LoginModel;
@@ -10,6 +12,12 @@ import matrimonial.assignment.com.matrimonialassignment.serviceDtos.Result;
 import matrimonial.assignment.com.matrimonialassignment.serviceDtos.loginDtos.response.LoginResponseObj;
 import matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager;
 
+import static matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager.NAVIGATION_VALUE;
+import static matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager.PREF_LOGIN_RESULT;
+import static matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager.USER_ID;
+import static matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager.getObjectToString;
+import static matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager.writeInt;
+import static matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager.writeString;
 import static matrimonial.assignment.com.matrimonialassignment.utils.Constants.FINISH;
 import static matrimonial.assignment.com.matrimonialassignment.utils.Constants.ProgressDialog.DISMISS_PROGRESS_DIALOG;
 import static matrimonial.assignment.com.matrimonialassignment.utils.Constants.ProgressDialog.SHOW_PROGRESS_DIALOG;
@@ -72,8 +80,9 @@ public class LoginViewModel extends BaseViewModel {
                 LoginResponseObj loginResponseObj = (LoginResponseObj) result.getObject();
                 setProgressDialog(DISMISS_PROGRESS_DIALOG);
                 if (loginResponseObj != null && loginResponseObj.getStatus()) {
-                    SharedPrefManager.writeInt(SharedPrefManager.NAVIGATION_VALUE,1);
-                    SharedPrefManager.writeInt(SharedPrefManager.USER_ID,loginResponseObj.getDataResponse().get(0).getUserId());
+                    writeString(PREF_LOGIN_RESULT, new Gson().toJson(loginResponseObj.getDataResponse().get(0)));
+                    writeInt(NAVIGATION_VALUE,1);
+                    writeInt(USER_ID,loginResponseObj.getDataResponse().get(0).getUserId());
                     setToastMessage("Success");
                     setCallActivity(DashBoardActivity.class);
                     setFinishActivity(FINISH);

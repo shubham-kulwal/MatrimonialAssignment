@@ -21,4 +21,17 @@ public class SearchUserApiService extends ApiService {
         searchUserRequestObj.setRequestUserId(exploreModel.getRequestedID());
         return searchUserRequestObj;
     }
+
+    public void callShortListUserApi(ExploreModel exploreModel){
+        retrofitApiCall(getSearchUserRequestObj(exploreModel), SearchUserResponseObj.class,
+                SEARCH_USER_API, exploreModel.getServiceID(), POST_METHOD,exploreModel.getHeaders());
+    }
+
+    private SearchUserRequestObj getShortlistUserRequestObj(ExploreModel exploreModel){
+        SearchUserRequestObj searchUserRequestObj = new SearchUserRequestObj();
+        searchUserRequestObj.setPageNo(1);
+        searchUserRequestObj.setPageSize("50");
+        searchUserRequestObj.setRequestUserId(exploreModel.getRequestedID());
+        return searchUserRequestObj;
+    }
 }

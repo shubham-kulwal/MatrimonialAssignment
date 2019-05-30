@@ -18,6 +18,7 @@ public interface Constants {
         String LOGIN_API = "/account/login";
         String REGISTER_USER_API = "/account/RegisterUser";
         String SEARCH_USER_API = "userprofile/SearchUsers";
+        String SHORLIST_USER_API = "/UserProfile/ShortlistAndroid";
     }
 
 }
