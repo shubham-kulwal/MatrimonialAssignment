@@ -27,7 +27,7 @@ public class UserDetailsActivity extends AppCompatActivity {
 
     private ActivityUserDetailsLayoutBinding initializeActivityBinding() {
         activityUserDetailsLayoutBinding = DataBindingUtil.setContentView(UserDetailsActivity.this, R.layout.activity_user_details_layout);
-        activityUserDetailsLayoutBinding.setUserDetailsViewModel(new UserDetailsViewModel());
+        activityUserDetailsLayoutBinding.setUserDetailsViewModel(new UserDetailsViewModel(this));
         activityUserDetailsLayoutBinding.executePendingBindings();
         return activityUserDetailsLayoutBinding;
     }

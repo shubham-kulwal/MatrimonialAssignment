@@ -84,7 +84,7 @@ public class ExploreFragment extends BaseFragment {
         }
 
         @Override
-        public void onMarkAsFavouriteClick(DataResponse dataResp, final String tag, final int position) {
+        public void onMarkAsFavouriteClick(final DataResponse dataResp, final String tag, final int position) {
             String message = "Are you sure, you want to mark this user as " + tag;
             CommonMethods.showDialog(getActivity(), message, "YES", "CANCEL", new DialogInterface.OnClickListener() {
                 @Override
@@ -92,14 +92,15 @@ public class ExploreFragment extends BaseFragment {
                     List<DataResponse> dataResponse =new ArrayList<>();
                     if (mAdapter!=null) {
                         dataResponse.addAll(mAdapter.getDataResponse());
-                        if (tag == "unfavourite") {
+                        if (tag == "Unfavourite") {
                             dataResponse.get(position).setFavourite(0);
                         }else {
                             dataResponse.get(position).setFavourite(1);
                         }
                         mAdapter.setDataResponse(dataResponse);
                         mAdapter.notifyDataSetChanged();
-                        fragmentExploreLayoutBinding.getViewModel().callShortlistUser();
+                        observeIsFavouriteResponse(position);
+                        fragmentExploreLayoutBinding.getViewModel().callShortlistUser(dataResp.getUserId());
                     }
                 }
             }, new DialogInterface.OnClickListener() {
@@ -107,8 +108,28 @@ public class ExploreFragment extends BaseFragment {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                 }
-            },false);
+            }, false);
         }
     };
+
+    private void observeIsFavouriteResponse(final int position) {
+        fragmentExploreLayoutBinding.getViewModel().getIsFavouriteLiveData().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean isMarkedFavourite) {
+                List<DataResponse> dataResponse = new ArrayList<>();
+                dataResponse.addAll(mAdapter.getDataResponse());
+                if (isMarkedFavourite) {
+                    dataResponse.get(position).setFavourite(1);
+                } else {
+                    dataResponse.get(position).setFavourite(0);
+                }
+                if (mAdapter != null) {
+                    mAdapter.setDataResponse(dataResponse);
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+    }
+
 
 }
