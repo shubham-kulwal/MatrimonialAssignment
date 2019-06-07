@@ -21,6 +21,8 @@ public interface Constants {
         String SHORLIST_USER_API = "UserProfile/ShortlistAndroid";
         String BLOCK_USER_API = "UserProfile/BlockUserAndroid";
         String EXPRESS_INTEREST_USER_API = "UserProfile/ExpressInterestAndroid";
+        String GET_BLOCK_USER_LIST= "UserProfile/GetBlockUserDetails";
+        String GET_SHORTLISTED_USER_LIST= "ShortList/GetShortlistUserAndroid";
 
     }
 
