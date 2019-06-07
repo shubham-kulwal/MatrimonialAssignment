@@ -11,6 +11,7 @@ import matrimonial.assignment.com.matrimonialassignment.service.SearchUserApiSer
 import matrimonial.assignment.com.matrimonialassignment.serviceDtos.Result;
 import matrimonial.assignment.com.matrimonialassignment.serviceDtos.searchUser.response.DataResponse;
 import matrimonial.assignment.com.matrimonialassignment.serviceDtos.searchUser.response.SearchUserResponseObj;
+import matrimonial.assignment.com.matrimonialassignment.serviceDtos.shortlistUserDtos.ShortlistAndroidResponseObj;
 import matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager;
 import matrimonial.assignment.com.matrimonialassignment.userDetailsModule.view.UserDetailsActivity;
 import savysoft.accl.retrofit.RetrofitHeaders;
@@ -41,11 +42,11 @@ public class ExploreViewModel extends BaseViewModel {
     }
 
     public void getUsers() {
+        observeApiResult(searchUserApiService);
         callSearchUsersApi();
     }
 
     public void callShortlistUser(int userId){
-        observeApiResult(searchUserApiService);
         setProgressDialog(SHOW_PROGRESS_DIALOG);
         exploreModel.setServiceID(SHORTLIST_USER_LIST);
         exploreModel.setRequestedID(readInt(USER_ID));
@@ -54,7 +55,6 @@ public class ExploreViewModel extends BaseViewModel {
     }
 
     private void callSearchUsersApi() {
-        observeApiResult(searchUserApiService);
         setProgressDialog(SHOW_PROGRESS_DIALOG);
         exploreModel.setServiceID(SEARCH_USER_LIST);
         exploreModel.setRequestedID(readInt(USER_ID));
@@ -80,9 +80,8 @@ public class ExploreViewModel extends BaseViewModel {
                 break;
 
             case SHORTLIST_USER_LIST:
-                Boolean response = (Boolean) result.getObject();
-                isFavouriteLiveData.setValue(response);
-                setProgressDialog(DISMISS_PROGRESS_DIALOG);
+                ShortlistAndroidResponseObj response = (ShortlistAndroidResponseObj) result.getObject();
+                callSearchUsersApi();
                 break;
         }
     }

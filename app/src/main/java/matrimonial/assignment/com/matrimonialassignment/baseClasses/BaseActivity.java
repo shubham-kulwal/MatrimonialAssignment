@@ -10,6 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import savysoft.accl.retrofit.RetrofitHeaders;
+
 import static matrimonial.assignment.com.matrimonialassignment.utils.Constants.FINISH;
 import static matrimonial.assignment.com.matrimonialassignment.utils.Constants.ProgressDialog.DISMISS_PROGRESS_DIALOG;
 import static matrimonial.assignment.com.matrimonialassignment.utils.Constants.ProgressDialog.PROGRESS_DIALOG_MESSAGE;
@@ -40,6 +46,14 @@ public class BaseActivity extends AppCompatActivity {
         Intent callDestinationActivity = new Intent(context, cls);
         callDestinationActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         context.startActivity(callDestinationActivity);
+    }
+
+    public List<RetrofitHeaders> getHeaders(){
+        List<RetrofitHeaders> headers = new ArrayList();
+        headers.add(new RetrofitHeaders("Content-Type","application/json"));
+        headers.add(new RetrofitHeaders("isdevice","true"));
+        headers.add(new RetrofitHeaders("token","Tasmay0603@"));
+        return headers;
     }
 
     public void observeFinishActivity(BaseViewModel viewModel) {

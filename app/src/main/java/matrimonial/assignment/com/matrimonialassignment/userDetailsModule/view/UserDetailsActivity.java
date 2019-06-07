@@ -4,18 +4,20 @@ import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
 import matrimonial.assignment.com.matrimonialassignment.R;
+import matrimonial.assignment.com.matrimonialassignment.baseClasses.BaseActivity;
 import matrimonial.assignment.com.matrimonialassignment.databinding.ActivityLoginLayoutBinding;
 import matrimonial.assignment.com.matrimonialassignment.databinding.ActivityUserDetailsLayoutBinding;
 import matrimonial.assignment.com.matrimonialassignment.exploreModule.view.ExploreFragment;
 import matrimonial.assignment.com.matrimonialassignment.serviceDtos.searchUser.response.DataResponse;
 import matrimonial.assignment.com.matrimonialassignment.userDetailsModule.viewModel.UserDetailsViewModel;
 
-public class UserDetailsActivity extends AppCompatActivity {
+public class UserDetailsActivity extends BaseActivity {
     ActivityUserDetailsLayoutBinding activityUserDetailsLayoutBinding;
 
     @Override
@@ -23,6 +25,11 @@ public class UserDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         initializeActivityBinding();
         init();
+        sendDataToViewModel();
+    }
+
+    private void sendDataToViewModel() {
+        activityUserDetailsLayoutBinding.getUserDetailsViewModel().setHeaders(getHeaders());
     }
 
     private ActivityUserDetailsLayoutBinding initializeActivityBinding() {
@@ -63,6 +70,12 @@ public class UserDetailsActivity extends AppCompatActivity {
         }else {
             activityUserDetailsLayoutBinding.manglik.setText("No");
         }
+        if (dataResponse.isRequestSend())
+            activityUserDetailsLayoutBinding.expressInterestTv.setVisibility(View.INVISIBLE);
 
+    }
+
+   public void hideExpressInterest(){
+        activityUserDetailsLayoutBinding.expressInterestTv.setVisibility(View.INVISIBLE);
     }
 }

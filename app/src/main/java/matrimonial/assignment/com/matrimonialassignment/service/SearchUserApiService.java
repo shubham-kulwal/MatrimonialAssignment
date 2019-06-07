@@ -4,6 +4,7 @@ import matrimonial.assignment.com.matrimonialassignment.exploreModule.model.Expl
 import matrimonial.assignment.com.matrimonialassignment.serviceDtos.searchUser.request.SearchUserRequestObj;
 import matrimonial.assignment.com.matrimonialassignment.serviceDtos.searchUser.response.SearchUserResponseObj;
 import matrimonial.assignment.com.matrimonialassignment.serviceDtos.shortlistUserDtos.ShortlistAndroidRequestObj;
+import matrimonial.assignment.com.matrimonialassignment.serviceDtos.shortlistUserDtos.ShortlistAndroidResponseObj;
 
 import static matrimonial.assignment.com.matrimonialassignment.utils.Constants.APILIST.SEARCH_USER_API;
 import static matrimonial.assignment.com.matrimonialassignment.utils.Constants.APILIST.SHORLIST_USER_API;
@@ -18,14 +19,12 @@ public class SearchUserApiService extends ApiService {
 
     private SearchUserRequestObj getSearchUserRequestObj(ExploreModel exploreModel){
         SearchUserRequestObj searchUserRequestObj = new SearchUserRequestObj();
-        searchUserRequestObj.setPageNo(1);
-        searchUserRequestObj.setPageSize("50");
         searchUserRequestObj.setRequestUserId(exploreModel.getRequestedID());
         return searchUserRequestObj;
     }
 
     public void callShortListUserApi(ExploreModel exploreModel){
-        retrofitApiCall(getShortlistUserRequestObj(exploreModel), Object.class,
+        retrofitApiCall(getShortlistUserRequestObj(exploreModel), ShortlistAndroidResponseObj.class,
                 SHORLIST_USER_API, exploreModel.getServiceID(), POST_METHOD,exploreModel.getHeaders());
     }
 

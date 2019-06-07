@@ -104,6 +104,46 @@ public class DataResponse {
     private String IsSpec = null;
     private int TotalRecords;
     private int favourite;
+    private boolean IsShorlisted;
+    private Object RequestStatus;
+    private int FullAccess;
+    private int OnlyImageFullAccess;
+
+    public int getFavourite() {
+        return favourite;
+    }
+
+    public boolean isShorlisted() {
+        return IsShorlisted;
+    }
+
+    public void setShorlisted(boolean shorlisted) {
+        IsShorlisted = shorlisted;
+    }
+
+    public Object getRequestStatus() {
+        return RequestStatus;
+    }
+
+    public void setRequestStatus(Object requestStatus) {
+        RequestStatus = requestStatus;
+    }
+
+    public int getFullAccess() {
+        return FullAccess;
+    }
+
+    public void setFullAccess(int fullAccess) {
+        FullAccess = fullAccess;
+    }
+
+    public int getOnlyImageFullAccess() {
+        return OnlyImageFullAccess;
+    }
+
+    public void setOnlyImageFullAccess(int onlyImageFullAccess) {
+        OnlyImageFullAccess = onlyImageFullAccess;
+    }
 
     public int isFavourite() {
         return favourite;

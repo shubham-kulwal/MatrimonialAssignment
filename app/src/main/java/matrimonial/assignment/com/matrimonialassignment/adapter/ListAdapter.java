@@ -68,7 +68,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         holder.address.setText("Address: " + dataResp.getAddress());
 
 
-            if (dataResponse.get(position).isFavourite() == 1) {
+            if (dataResponse.get(position).isShorlisted()) {
                 holder.favourite_iv.setBackground(context.getResources().getDrawable(R.drawable.heart_red));
             } else {
                 holder.favourite_iv.setBackground(context.getResources().getDrawable(R.drawable.heart_white));
@@ -85,12 +85,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         holder.favourite_iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (dataResponse.get(position).isFavourite() == 0) {
+                if (!dataResponse.get(position).isShorlisted()) {
                     holder.favourite_iv.setTag("Favourite");
+                    onItemClickListener.onMarkAsFavouriteClick(dataResponse.get(position), v.getTag().toString(),position);
                 } else {
                     holder.favourite_iv.setTag("Unfavourite");
                 }
-                onItemClickListener.onMarkAsFavouriteClick(dataResponse.get(position), v.getTag().toString(),position);
+
             }
         });
     }

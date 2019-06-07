@@ -4,15 +4,31 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 
+import java.util.List;
+
 import matrimonial.assignment.com.matrimonialassignment.baseClasses.BaseViewModel;
+import matrimonial.assignment.com.matrimonialassignment.exploreModule.view.ExploreFragment;
+import matrimonial.assignment.com.matrimonialassignment.service.ExpressInterestService;
+import matrimonial.assignment.com.matrimonialassignment.serviceDtos.ExpressInterestAndroid.ExpressInterestAndroidResponseObj;
 import matrimonial.assignment.com.matrimonialassignment.serviceDtos.Result;
+import matrimonial.assignment.com.matrimonialassignment.userDetailsModule.model.UserDetailModel;
 import matrimonial.assignment.com.matrimonialassignment.userDetailsModule.view.UserDetailsActivity;
 import matrimonial.assignment.com.matrimonialassignment.utils.CommonMethods;
+import savysoft.accl.retrofit.RetrofitHeaders;
+
+import static matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager.USER_ID;
+import static matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager.readInt;
+import static matrimonial.assignment.com.matrimonialassignment.utils.Constants.ProgressDialog.DISMISS_PROGRESS_DIALOG;
+import static matrimonial.assignment.com.matrimonialassignment.utils.Constants.ProgressDialog.SHOW_PROGRESS_DIALOG;
 
 public class UserDetailsViewModel extends BaseViewModel {
 
     public String name;
-    private Activity activity;
+    private UserDetailsActivity activity;
+    private ExpressInterestService expressInterestService;
+    private UserDetailModel userDetailModel;
+    private final int EXPRESS_INTEREST_SERVICEID = 1;
+    public boolean hideExpressInterest = false;
 
     public String getName() {
         return name;
@@ -24,6 +40,8 @@ public class UserDetailsViewModel extends BaseViewModel {
 
     public UserDetailsViewModel(UserDetailsActivity activity) {
         this.activity = activity;
+        expressInterestService = new ExpressInterestService();
+        userDetailModel = new UserDetailModel();
     }
 
     public void blockUserClick() {
@@ -31,7 +49,20 @@ public class UserDetailsViewModel extends BaseViewModel {
     }
 
     private void callBlockUserApi() {
-        observeApiResult();
+
+    }
+
+    private void callExpressInterestApi() {
+        observeApiResult(expressInterestService);
+        setProgressDialog(SHOW_PROGRESS_DIALOG);
+        userDetailModel.setServiceID(EXPRESS_INTEREST_SERVICEID);
+        userDetailModel.setRequestedID(readInt(USER_ID));
+        userDetailModel.setrequestTo(ExploreFragment.dataResponse.getUserId());
+        expressInterestService.callExpressInterestApi(userDetailModel);
+    }
+
+    public void setHeaders(List<RetrofitHeaders> headers) {
+        userDetailModel.setHeaders(headers);
     }
 
     public void expressInterestClick() {
@@ -45,6 +76,8 @@ public class UserDetailsViewModel extends BaseViewModel {
                 dialog.dismiss();
                 if (positiveLabel.equalsIgnoreCase("Block"))
                     callBlockUserApi();
+                else
+                    callExpressInterestApi();
             }
         }, new DialogInterface.OnClickListener() {
             @Override
@@ -57,5 +90,15 @@ public class UserDetailsViewModel extends BaseViewModel {
     @Override
     public void responseSuccess(Result result) {
 
+        switch (result.getServiceId()) {
+
+            case EXPRESS_INTEREST_SERVICEID:
+                ExpressInterestAndroidResponseObj expressInterestAndroidResponseObj = (ExpressInterestAndroidResponseObj) result.getObject();
+                if (expressInterestAndroidResponseObj.getStatus())
+                    setToastMessage("Request Send");
+                activity.hideExpressInterest();
+                setProgressDialog(DISMISS_PROGRESS_DIALOG);
+                break;
+        }
     }
 }

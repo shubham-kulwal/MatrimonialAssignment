@@ -19,23 +19,22 @@ import matrimonial.assignment.com.matrimonialassignment.adapter.ListAdapter;
 
 public class InterestFragment extends Fragment {
 
-    private RecyclerView recyclerView;
+    private View view;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_interest_layout, null);
-        recyclerView = view.findViewById(R.id.recycler_view);
+        view = inflater.inflate(R.layout.fragment_interest_layout, null);
         return view;
     }
 
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-      /*  ListAdapter mAdapter = new ListAdapter(getPersonList());
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);*/
+        ViewPager viewPager = view.findViewById(R.id.viewPager);
+        List<Fragment> tabFragmentList = new ArrayList<>();
+        tabFragmentList.add(acuteMedicationFragment);
+        tabFragmentList.add(preventiveMedicationFragment);
     }
 }

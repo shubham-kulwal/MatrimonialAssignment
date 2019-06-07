@@ -48,7 +48,6 @@ public class ExploreFragment extends BaseFragment {
         fragmentExploreLayoutBinding.setViewModel(new ExploreViewModel());
         fragmentExploreLayoutBinding.executePendingBindings();
         init();
-        fragmentExploreLayoutBinding.getViewModel().getUsers();
     }
 
     private void init() {
@@ -89,19 +88,7 @@ public class ExploreFragment extends BaseFragment {
             CommonMethods.showDialog(getActivity(), message, "YES", "CANCEL", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    List<DataResponse> dataResponse =new ArrayList<>();
-                    if (mAdapter!=null) {
-                        dataResponse.addAll(mAdapter.getDataResponse());
-                        if (tag == "Unfavourite") {
-                            dataResponse.get(position).setFavourite(0);
-                        }else {
-                            dataResponse.get(position).setFavourite(1);
-                        }
-                        mAdapter.setDataResponse(dataResponse);
-                        mAdapter.notifyDataSetChanged();
-                        observeIsFavouriteResponse(position);
-                        fragmentExploreLayoutBinding.getViewModel().callShortlistUser(dataResp.getUserId());
-                    }
+                    fragmentExploreLayoutBinding.getViewModel().callShortlistUser(dataResp.getUserId());
                 }
             }, new DialogInterface.OnClickListener() {
                 @Override
@@ -112,24 +99,9 @@ public class ExploreFragment extends BaseFragment {
         }
     };
 
-    private void observeIsFavouriteResponse(final int position) {
-        fragmentExploreLayoutBinding.getViewModel().getIsFavouriteLiveData().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(@Nullable Boolean isMarkedFavourite) {
-                List<DataResponse> dataResponse = new ArrayList<>();
-                dataResponse.addAll(mAdapter.getDataResponse());
-                if (isMarkedFavourite) {
-                    dataResponse.get(position).setFavourite(1);
-                } else {
-                    dataResponse.get(position).setFavourite(0);
-                }
-                if (mAdapter != null) {
-                    mAdapter.setDataResponse(dataResponse);
-                    mAdapter.notifyDataSetChanged();
-                }
-            }
-        });
+    @Override
+    public void onResume() {
+        super.onResume();
+        fragmentExploreLayoutBinding.getViewModel().getUsers();
     }
-
-
 }
