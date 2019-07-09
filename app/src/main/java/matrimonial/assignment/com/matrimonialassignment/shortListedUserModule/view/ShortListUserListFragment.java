@@ -1,5 +1,6 @@
 package matrimonial.assignment.com.matrimonialassignment.shortListedUserModule.view;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.Observer;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import matrimonial.assignment.com.matrimonialassignment.R;
@@ -21,9 +23,20 @@ import matrimonial.assignment.com.matrimonialassignment.databinding.FragmentShor
 import matrimonial.assignment.com.matrimonialassignment.serviceDtos.shortListedUserListDtos.DataResponse;
 import matrimonial.assignment.com.matrimonialassignment.shortListedUserModule.viewModel.ShortListedUserListViewModel;
 
+@SuppressLint("ValidFragment")
 public class ShortListUserListFragment extends BaseFragment {
 
     private FragmentShortlistuserListLayoutBinding fragmentShortlistuserListLayoutBinding;
+    private List<DataResponse> shortListUserList;
+
+
+
+    @SuppressLint("ValidFragment")
+    public ShortListUserListFragment(List<DataResponse> shortListUserList) {
+        super();
+        this.shortListUserList = new ArrayList<>();
+        this.shortListUserList.addAll(shortListUserList);
+    }
 
     @Nullable
     @Override
@@ -41,35 +54,37 @@ public class ShortListUserListFragment extends BaseFragment {
     }
 
     private void init() {
-        observeProgressDialog(fragmentShortlistuserListLayoutBinding.getViewModel());
+       /* observeProgressDialog(fragmentShortlistuserListLayoutBinding.getViewModel());
         observeFinishActivity(fragmentShortlistuserListLayoutBinding.getViewModel());
         observeApiResponse();
         sendDataToViewModel();
-        fragmentShortlistuserListLayoutBinding.getViewModel().getShortListedUsers();
+        fragmentShortlistuserListLayoutBinding.getViewModel().getShortListedUsers();*/
+
+        if (shortListUserList.size()==0){
+            fragmentShortlistuserListLayoutBinding.noDataAvailableTv.setVisibility(View.VISIBLE);
+            fragmentShortlistuserListLayoutBinding.recyclerView.setVisibility(View.GONE);
+        }else {
+            fragmentShortlistuserListLayoutBinding.recyclerView.setVisibility(View.VISIBLE);
+            fragmentShortlistuserListLayoutBinding.noDataAvailableTv.setVisibility(View.VISIBLE);
+            ShortListedUserAdapter mAdapter = new ShortListedUserAdapter(getContext(), shortListUserList);
+            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+            fragmentShortlistuserListLayoutBinding.recyclerView.setLayoutManager(mLayoutManager);
+            fragmentShortlistuserListLayoutBinding.recyclerView.setItemAnimator(new DefaultItemAnimator());
+            fragmentShortlistuserListLayoutBinding.recyclerView.setAdapter(mAdapter);
+        }
     }
 
-    private void sendDataToViewModel() {
+   /* private void sendDataToViewModel() {
         fragmentShortlistuserListLayoutBinding.getViewModel().setHeaders(getHeaders());
-    }
+    }*/
 
-    private void observeApiResponse() {
+   /* private void observeApiResponse() {
         fragmentShortlistuserListLayoutBinding.getViewModel().getDataResponseMutableLiveData().observe(this, new Observer<List<DataResponse>>() {
             @Override
             public void onChanged(@Nullable List<DataResponse> dataResponses) {
-                if (dataResponses.size()==0){
-                    fragmentShortlistuserListLayoutBinding.noDataAvailableTv.setVisibility(View.VISIBLE);
-                    fragmentShortlistuserListLayoutBinding.recyclerView.setVisibility(View.GONE);
-                }else {
-                    fragmentShortlistuserListLayoutBinding.recyclerView.setVisibility(View.VISIBLE);
-                    fragmentShortlistuserListLayoutBinding.noDataAvailableTv.setVisibility(View.VISIBLE);
-                    ShortListedUserAdapter mAdapter = new ShortListedUserAdapter(getContext(), dataResponses);
-                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-                    fragmentShortlistuserListLayoutBinding.recyclerView.setLayoutManager(mLayoutManager);
-                    fragmentShortlistuserListLayoutBinding.recyclerView.setItemAnimator(new DefaultItemAnimator());
-                    fragmentShortlistuserListLayoutBinding.recyclerView.setAdapter(mAdapter);
-                }
+
             }
         });
-    }
+    }*/
 
 }

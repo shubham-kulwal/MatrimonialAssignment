@@ -18,27 +18,27 @@ import static matrimonial.assignment.com.matrimonialassignment.utils.Constants.P
 public abstract class BaseViewModel extends BaseObservable {
 
     @Bindable
-    public Class<?> callActivity=null;
+    public Class<?> callActivity = null;
     @Bindable
     public String toastMessage;
     @Bindable
-    public int serviceId =-1;
+    public int serviceId = -1;
    /* @Bindable
-    public InternetConnectionInterface internetConnectionInterface=null;*/
+    public InternetConnectionInterface internetConnectionInterface;*/
 
     private MutableLiveData<Integer> finishActivity = new MutableLiveData<>();
     private MutableLiveData<Integer> showProgressDialog = new MutableLiveData<>();
 
-    public void setCallActivity(Class<?> callActivity){
-        this.callActivity=callActivity;
+    public void setCallActivity(Class<?> callActivity) {
+        this.callActivity = callActivity;
         notifyPropertyChanged(BR.callActivity);
     }
 
-    public LiveData getFinishActivity(){
-        return  finishActivity;
+    public LiveData getFinishActivity() {
+        return finishActivity;
     }
 
-    public void setFinishActivity(int value){
+    public void setFinishActivity(int value) {
         finishActivity.setValue(value);
     }
 
@@ -50,8 +50,8 @@ public abstract class BaseViewModel extends BaseObservable {
         showProgressDialog.setValue(flag);
     }
 
-    public void setToastMessage(String toastMessage){
-        this.toastMessage=toastMessage;
+    public void setToastMessage(String toastMessage) {
+        this.toastMessage = toastMessage;
         notifyPropertyChanged(BR.toastMessage);
     }
 
@@ -60,7 +60,7 @@ public abstract class BaseViewModel extends BaseObservable {
             @Override
             public void onChanged(@Nullable Result result) {
                 if (result != null && result.getStatusCode() == APIFAILURE_STATUSCODE) {
-                 //   setResponse(result.getServiceId());
+                   // setResponse(result.getServiceId());
                     setProgressDialog(DISMISS_PROGRESS_DIALOG);
                 } else {
                     if (result != null) {
@@ -71,11 +71,11 @@ public abstract class BaseViewModel extends BaseObservable {
         });
     }
 
-//    private void setResponse(int serviceId){
-//        this.serviceId=serviceId;
-//        notifyPropertyChanged(BR.serviceId);
-//        //notifyPropertyChanged(BR.internetConnectionInterface);
-//    }
+   /* private void setResponse(int serviceId) {
+        this.serviceId = serviceId;
+        notifyPropertyChanged(BR.serviceId);
+        notifyPropertyChanged(BR.internetConnectionInterface);
+    }*/
 
     public abstract void responseSuccess(Result result);
 }

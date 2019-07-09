@@ -74,16 +74,6 @@
                     android:textColor="#000000"
                     android:textSize="12dp" />
 
-                <TextView
-                    android:id="@+id/inbox_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:gravity="center"
-                    android:text="Inbox"
-                    android:textColor="#000000"
-                    android:textSize="12dp" />e
-
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -92,16 +82,16 @@
 
 
                     <TextView
-                        android:id="@+id/notification_tv"
+                        android:id="@+id/shortlist_tv"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="Notification"
+                        android:text="Shortlist"
                         android:textColor="#000000"
                         android:textSize="12dp" />
 
 
-                    <TextView
+                   <!-- <TextView
                         android:layout_width="18dp"
                         android:layout_height="18dp"
                         android:layout_alignParentRight="true"
@@ -110,7 +100,7 @@
                         android:gravity="center"
                         android:text="10"
                         android:textColor="@color/white"
-                        android:textSize="12dp" />
+                        android:textSize="12dp" />-->
 
 
                 </RelativeLayout>
@@ -122,7 +112,17 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:gravity="center"
-                    android:text="Interest"
+                    android:text="My Interest"
+                    android:textColor="#000000"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/inbox_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="Inbox"
                     android:textColor="#000000"
                     android:textSize="12dp" />
 

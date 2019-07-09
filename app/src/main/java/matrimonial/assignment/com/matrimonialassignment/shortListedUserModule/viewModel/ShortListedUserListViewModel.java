@@ -19,44 +19,9 @@ import static matrimonial.assignment.com.matrimonialassignment.utils.Constants.P
 
 public class ShortListedUserListViewModel extends BaseViewModel {
 
-    private ShortListedUserModel shortListedUserModel;
-    private ShortListedUserService shortListedUserService;
-    private final int SHORTLISTED_USER_LIST = 1;
-    private MutableLiveData<List<DataResponse>> dataResponseMutableLiveData;
-
-    public ShortListedUserListViewModel() {
-        shortListedUserModel = new ShortListedUserModel();
-        shortListedUserService = new ShortListedUserService();
-        dataResponseMutableLiveData = new MutableLiveData<>();
-    }
-
-    public void setHeaders(List<RetrofitHeaders> headers) {
-        shortListedUserModel.setHeaders(headers);
-    }
-
-    public void getShortListedUsers() {
-        setProgressDialog(SHOW_PROGRESS_DIALOG);
-        observeApiResult(shortListedUserService);
-        shortListedUserModel.setRequestUserId(readInt(USER_ID));
-        shortListedUserModel.setServiceId(SHORTLISTED_USER_LIST);
-        shortListedUserService.callShortListedUserListApi(shortListedUserModel);
-    }
-
-    public MutableLiveData<List<DataResponse>> getDataResponseMutableLiveData(){
-        return dataResponseMutableLiveData;
-    }
-
 
     @Override
     public void responseSuccess(Result result) {
-        switch (result.getServiceId()){
-            case SHORTLISTED_USER_LIST:
-                GetShortListedUserListResponseObj getShortListedUserListResponseObj = (GetShortListedUserListResponseObj) result.getObject();
-                if (getShortListedUserListResponseObj!=null){
-                    setProgressDialog(DISMISS_PROGRESS_DIALOG);
-                    dataResponseMutableLiveData.setValue(getShortListedUserListResponseObj.getDataResponse());
-                }
-                break;
-        }
+
     }
 }

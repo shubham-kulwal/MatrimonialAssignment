@@ -11,7 +11,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import matrimonial.assignment.com.matrimonialassignment.R;
@@ -21,6 +23,7 @@ import matrimonial.assignment.com.matrimonialassignment.serviceDtos.searchUser.r
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> {
 
     private List<DataResponse> dataResponse;
+    private List<DataResponse> filter_List;
     private Context context;
     private OnItemClickListener onItemClickListener;
 
@@ -48,6 +51,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         this.dataResponse = dataResponse;
         this.context = context;
         this.onItemClickListener = onItemClickListener;
+        filter_List = new ArrayList<>();
+        filter_List.addAll(this.dataResponse);
     }
 
     @Override
@@ -107,5 +112,21 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
 
     public void setDataResponse(List<DataResponse> dataResponse){
          this.dataResponse=dataResponse;
+    }
+
+    public void filterSearch(String searchQuery) {
+
+        dataResponse.clear();
+        if (searchQuery.length() == 0) {
+            dataResponse.addAll(filter_List);
+        } else {
+            searchQuery = searchQuery.toLowerCase(Locale.getDefault());
+            for (DataResponse returnValue : filter_List) {
+                if (returnValue.getFirstName().toLowerCase(Locale.getDefault()).startsWith(searchQuery)) {
+                    dataResponse.add(returnValue);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }

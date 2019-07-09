@@ -9,6 +9,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +57,25 @@ public class ExploreFragment extends BaseFragment {
         observeFinishActivity(fragmentExploreLayoutBinding.getViewModel());
         observeSearchResponse();
         sendDataToViewModel();
+        fragmentExploreLayoutBinding.searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (mAdapter != null) {
+                    mAdapter.filterSearch(String.valueOf(s));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
     }
 
     private void observeSearchResponse() {
@@ -67,6 +88,7 @@ public class ExploreFragment extends BaseFragment {
                 fragmentExploreLayoutBinding.recyclerView.setItemAnimator(new DefaultItemAnimator());
                 fragmentExploreLayoutBinding.recyclerView.setAdapter(mAdapter);
                 fragmentExploreLayoutBinding.getViewModel().setProgressDialog(DISMISS_PROGRESS_DIALOG);
+                fragmentExploreLayoutBinding.searchingLl.setVisibility(View.VISIBLE);
             }
         });
     }

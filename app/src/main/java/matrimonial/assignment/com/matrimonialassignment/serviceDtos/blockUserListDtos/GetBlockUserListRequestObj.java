@@ -1,14 +1,19 @@
+
 package matrimonial.assignment.com.matrimonialassignment.serviceDtos.blockUserListDtos;
+
+import com.google.gson.annotations.SerializedName;
 
 public class GetBlockUserListRequestObj {
 
-    private int RequestUserId;
+    @SerializedName("RequestUserId")
+    private int mRequestUserId;
 
     public int getRequestUserId() {
-        return RequestUserId;
+        return mRequestUserId;
     }
 
     public void setRequestUserId(int requestUserId) {
-        RequestUserId = requestUserId;
+        mRequestUserId = requestUserId;
     }
+
 }

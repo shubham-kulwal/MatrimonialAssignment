@@ -1,6 +1,7 @@
 package matrimonial.assignment.com.matrimonialassignment.exploreModule.viewModel;
 
 import android.arch.lifecycle.MutableLiveData;
+import android.databinding.Bindable;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import matrimonial.assignment.com.matrimonialassignment.serviceDtos.searchUser.r
 import matrimonial.assignment.com.matrimonialassignment.serviceDtos.shortlistUserDtos.ShortlistAndroidResponseObj;
 import matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager;
 import matrimonial.assignment.com.matrimonialassignment.userDetailsModule.view.UserDetailsActivity;
+import savysoft.accl.interfaces.InternetConnectionInterface;
 import savysoft.accl.retrofit.RetrofitHeaders;
 
 import static matrimonial.assignment.com.matrimonialassignment.sharedPreference.SharedPrefManager.USER_ID;
@@ -35,6 +37,7 @@ public class ExploreViewModel extends BaseViewModel {
         searchUserApiService = new SearchUserApiService();
         dataResponseMutableLiveData = new MutableLiveData<>();
         isFavouriteLiveData = new MutableLiveData<>();
+       // super.internetConnectionInterface = internetConnectionInterface;
     }
 
     public void setHeaders(List<RetrofitHeaders> headers) {
@@ -86,5 +89,13 @@ public class ExploreViewModel extends BaseViewModel {
         }
     }
 
+
+    /*@Bindable
+    InternetConnectionInterface internetConnectionInterface = new InternetConnectionInterface() {
+        @Override
+        public void internetConnectionRetryClick(int serviceId) {
+
+        }
+    };*/
 
 }

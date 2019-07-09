@@ -14,6 +14,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import matrimonial.assignment.com.matrimonialassignment.utils.CommonMethods;
+import savysoft.accl.interfaces.InternetConnectionInterface;
 import savysoft.accl.retrofit.RetrofitHeaders;
 
 import static matrimonial.assignment.com.matrimonialassignment.utils.Constants.FINISH;
@@ -29,6 +31,12 @@ public class BaseActivity extends AppCompatActivity {
         if (cls != null) {
             callActivity(view.getContext(), cls);
         }
+    }
+
+    @BindingAdapter({"internetConnectionInterface", "serviceId"})
+    public static  void  showInternetDialog(View view, InternetConnectionInterface internetConnectionInterface, int serviceID) {
+        if (serviceID != -1)
+            CommonMethods.showInternetConnectionDialog(view.getContext(), internetConnectionInterface, serviceID, false);
     }
 
     @BindingAdapter({"toastMessage"})

@@ -15,10 +15,11 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import matrimonial.assignment.com.matrimonialassignment.R;
+import matrimonial.assignment.com.matrimonialassignment.serviceDtos.blockUserListDtos.*;
 
-public class ShortListedUserAdapter  extends RecyclerView.Adapter<ShortListedUserAdapter.MyViewHolder> {
+public class BlockUserListAdapter extends RecyclerView.Adapter<BlockUserListAdapter.MyViewHolder> {
 
-    private List<matrimonial.assignment.com.matrimonialassignment.serviceDtos.shortListedUserListDtos.DataResponse> dataResponse;
+    private List<DataResponse> dataResponse;
     private Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -41,29 +42,29 @@ public class ShortListedUserAdapter  extends RecyclerView.Adapter<ShortListedUse
     }
 
 
-    public ShortListedUserAdapter(Context context, List<matrimonial.assignment.com.matrimonialassignment.serviceDtos.shortListedUserListDtos.DataResponse> dataResponse) {
+    public BlockUserListAdapter(Context context, List<DataResponse> dataResponse) {
         this.dataResponse = dataResponse;
         this.context = context;
     }
 
     @Override
-    public ShortListedUserAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BlockUserListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.shortlisted_user_list_adapter_layout, parent, false);
+                .inflate(R.layout.block_user_list_adapter_layout, parent, false);
 
-        return new ShortListedUserAdapter.MyViewHolder(itemView);
+        return new BlockUserListAdapter.MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(final ShortListedUserAdapter.MyViewHolder holder, final int position) {
-        final matrimonial.assignment.com.matrimonialassignment.serviceDtos.shortListedUserListDtos.DataResponse dataResp = dataResponse.get(position);
+    public void onBindViewHolder(final BlockUserListAdapter.MyViewHolder holder, final int position) {
+        final DataResponse dataResp = dataResponse.get(position);
         holder.name.setText("Name: " + dataResp.getFirstName() + " " + " " + dataResp.getLName());
         holder.age.setText("Age: " + dataResp.getAge() + "");
         holder.address.setText("Address: " + dataResp.getCity());
-        if (dataResp.getRequestDate().contains("Date")){
-            holder.dob.setText("Requested Date: "+"10-06-2019");
+        if (dataResp.getDateOfBirth().contains("Date")){
+            holder.dob.setText("Birth Date: "+"10-06-2019");
         }else {
-            holder.dob.setText("Requested Date: "+dataResp.getRequestDate());
+            holder.dob.setText("Requested Date: "+dataResp.getDateOfBirth());
         }
 
         Glide.with(context).load(dataResp.getImg1()).into(holder.profile_image);
