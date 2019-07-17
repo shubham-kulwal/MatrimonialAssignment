@@ -1,6 +1,7 @@
 package matrimonial.assignment.com.matrimonialassignment.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -192,5 +193,18 @@ public class DashBoardActivity extends BaseActivity implements View.OnClickListe
     public void onBackPressed() {
         super.onBackPressed();
         finishAffinity();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            if (fragment != null) {
+                if (fragment instanceof ProfileFragment) {
+                    fragment.onActivityResult(requestCode, resultCode, data);
+                    break;
+                }
+            }
+        }
+
     }
 }

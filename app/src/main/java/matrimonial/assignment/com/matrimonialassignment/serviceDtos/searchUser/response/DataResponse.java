@@ -3,9 +3,11 @@ package matrimonial.assignment.com.matrimonialassignment.serviceDtos.searchUser.
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity(tableName = "users")
+import java.util.List;
+
+
 public class DataResponse {
-    @PrimaryKey
+
     private int UserId;
     private int IsManglik;
     private int Jobdata;
@@ -108,6 +110,25 @@ public class DataResponse {
     private Object RequestStatus;
     private int FullAccess;
     private int OnlyImageFullAccess;
+    private boolean IsBlocked;
+    private List<ImageList> ImageList;
+
+
+    public List<matrimonial.assignment.com.matrimonialassignment.serviceDtos.searchUser.response.ImageList> getImageList() {
+        return ImageList;
+    }
+
+    public void setImageList(List<matrimonial.assignment.com.matrimonialassignment.serviceDtos.searchUser.response.ImageList> imageList) {
+        ImageList = imageList;
+    }
+
+    public boolean isBlocked() {
+        return IsBlocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        IsBlocked = blocked;
+    }
 
     public int getFavourite() {
         return favourite;

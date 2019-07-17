@@ -31,7 +31,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         TextView name, dob, age, contact, address;
         CircleImageView profile_image;
         CardView cardLayout;
-        ImageView favourite_iv;
+        ImageView favourite_iv, block_iv;
 
         public MyViewHolder(View view) {
             super(view);
@@ -43,6 +43,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
             profile_image = (CircleImageView) view.findViewById(R.id.profile_image);
             cardLayout = view.findViewById(R.id.cardLayout);
             favourite_iv = view.findViewById(R.id.favourite_iv);
+            block_iv = view.findViewById(R.id.block_iv);
         }
     }
 
@@ -77,6 +78,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                 holder.favourite_iv.setBackground(context.getResources().getDrawable(R.drawable.heart_red));
             } else {
                 holder.favourite_iv.setBackground(context.getResources().getDrawable(R.drawable.heart_white));
+            }
+
+            if (dataResponse.get(position).isBlocked()){
+                holder.block_iv.setBackground(context.getResources().getDrawable(R.drawable.block_user_red_icon));
+            }else {
+                holder.block_iv.setBackground(context.getResources().getDrawable(R.drawable.block_user_grey_icon));
             }
 
         Glide.with(context).load(dataResp.getImg1()).into(holder.profile_image);

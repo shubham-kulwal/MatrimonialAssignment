@@ -55,6 +55,7 @@
                         android:text="Upload"
                         android:gravity="center"
                         android:textColor="@color/white"
+                        android:id="@+id/upload_tv"
                         android:background="@drawable/rounded_rectangle_blue_color_filled"/>
 
                 </LinearLayout>

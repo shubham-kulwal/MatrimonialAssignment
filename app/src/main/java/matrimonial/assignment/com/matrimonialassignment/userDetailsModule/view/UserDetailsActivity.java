@@ -1,24 +1,39 @@
 package matrimonial.assignment.com.matrimonialassignment.userDetailsModule.view;
 
+import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.yarolegovich.discretescrollview.DSVOrientation;
+import com.yarolegovich.discretescrollview.DiscreteScrollView;
+import com.yarolegovich.discretescrollview.InfiniteScrollAdapter;
+import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import matrimonial.assignment.com.matrimonialassignment.R;
+import matrimonial.assignment.com.matrimonialassignment.activity.ViewImageActivity;
+import matrimonial.assignment.com.matrimonialassignment.adapter.ImageAdapter;
 import matrimonial.assignment.com.matrimonialassignment.baseClasses.BaseActivity;
+import matrimonial.assignment.com.matrimonialassignment.callbacks.onImageViewListener;
 import matrimonial.assignment.com.matrimonialassignment.databinding.ActivityLoginLayoutBinding;
 import matrimonial.assignment.com.matrimonialassignment.databinding.ActivityUserDetailsLayoutBinding;
 import matrimonial.assignment.com.matrimonialassignment.exploreModule.view.ExploreFragment;
 import matrimonial.assignment.com.matrimonialassignment.serviceDtos.searchUser.response.DataResponse;
 import matrimonial.assignment.com.matrimonialassignment.userDetailsModule.viewModel.UserDetailsViewModel;
 
-public class UserDetailsActivity extends BaseActivity {
+public class UserDetailsActivity extends BaseActivity implements onImageViewListener {
     ActivityUserDetailsLayoutBinding activityUserDetailsLayoutBinding;
+    private InfiniteScrollAdapter infiniteAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +56,20 @@ public class UserDetailsActivity extends BaseActivity {
 
     private void init() {
         DataResponse dataResponse = ExploreFragment.dataResponse;
-        Glide.with(this).load(dataResponse.getImg1()).into(activityUserDetailsLayoutBinding.profileImage);
+       // itemPicker = (DiscreteScrollView) findViewById(R.id.item_picker);
+      /*  List<String> images = new ArrayList<>();
+        for (int i=0 ;  i <=5 ; i++ ){
+            images.add(dataResponse.getImg1());
+        }*/
+        activityUserDetailsLayoutBinding.itemPicker.setOrientation(DSVOrientation.HORIZONTAL);
+      //  activityUserDetailsLayoutBinding.itemPicker.addOnItemChangedListener(this);
+        infiniteAdapter = InfiniteScrollAdapter.wrap(new ImageAdapter(dataResponse.getImageList(), this));
+        activityUserDetailsLayoutBinding.itemPicker.setAdapter(infiniteAdapter);
+    //    activityUserDetailsLayoutBinding.itemPicker.setItemTransitionTimeMillis(DiscreteScrollViewOptions.getTransitionTime());
+        activityUserDetailsLayoutBinding.itemPicker.setItemTransformer(new ScaleTransformer.Builder()
+                .setMinScale(0.8f)
+                .build());
+     //   Glide.with(this).load(dataResponse.getImg1()).into(activityUserDetailsLayoutBinding.profileImage);
         activityUserDetailsLayoutBinding.name.setText(dataResponse.getFirstName()+" "+dataResponse.getMName()+" "+dataResponse.getLName());
         activityUserDetailsLayoutBinding.dateOfBirth.setText(dataResponse.getDateOfBirth());
         activityUserDetailsLayoutBinding.timeOfBirth.setText(dataResponse.getTimeofBirth());
@@ -78,4 +106,23 @@ public class UserDetailsActivity extends BaseActivity {
    public void hideExpressInterest(){
         activityUserDetailsLayoutBinding.expressInterestTv.setVisibility(View.INVISIBLE);
     }
+
+    @Override
+    public void onImageClick(String imageURl) {
+        Intent intent = new Intent(this , ViewImageActivity.class );
+        intent.putExtra("image", imageURl);
+        startActivity(intent);
+    }
+
+
+
+    /*@Override
+    public void onCurrentItemChanged(@Nullable RecyclerView.ViewHolder viewHolder, int adapterPosition) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }*/
 }

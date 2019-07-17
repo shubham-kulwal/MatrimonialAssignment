@@ -3,6 +3,12 @@
     package="matrimonial.assignment.com.matrimonialassignment">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".application.ApplicationClass"
@@ -12,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".userDetailsModule.view.UserDetailsActivity"></activity>
+        <activity android:name=".activity.ViewImageActivity"></activity>
+        <activity android:name=".userDetailsModule.view.UserDetailsActivity" />
         <activity android:name=".registrationModule.view.RegistrationActivity" />
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".splashScreenModule.view.SplashScreenActivity">
