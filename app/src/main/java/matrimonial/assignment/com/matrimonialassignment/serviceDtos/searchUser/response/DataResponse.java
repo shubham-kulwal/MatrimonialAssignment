@@ -112,7 +112,15 @@ public class DataResponse {
     private int OnlyImageFullAccess;
     private boolean IsBlocked;
     private List<ImageList> ImageList;
+    private String DateOfBirthString;
 
+    public String getDateOfBirthString() {
+        return DateOfBirthString;
+    }
+
+    public void setDateOfBirthString(String dateOfBirthString) {
+        DateOfBirthString = dateOfBirthString;
+    }
 
     public List<matrimonial.assignment.com.matrimonialassignment.serviceDtos.searchUser.response.ImageList> getImageList() {
         return ImageList;

@@ -117,12 +117,12 @@
                     android:textSize="12dp" />
 
                 <TextView
-                    android:id="@+id/inbox_tv"
+                    android:id="@+id/visitor_tv"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:gravity="center"
-                    android:text="Inbox"
+                    android:text="Visitor"
                     android:textColor="#000000"
                     android:textSize="12dp" />
 

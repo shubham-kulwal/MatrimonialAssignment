@@ -119,11 +119,33 @@ public class ExploreFragment extends BaseFragment {
                 }
             }, false);
         }
+
+        @Override
+        public void onExpressInterestClick(DataResponse dataResp) {
+            showDialog("Are you sure you want to express interest to this user?", "Express Interest", dataResp.getUserId());
+        }
     };
+
+    private void showDialog(String message, final String positiveLabel, final int userId) {
+        CommonMethods.showDialog(getActivity(), message, positiveLabel, "Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                fragmentExploreLayoutBinding.getViewModel().callExpressInterestApi(userId);
+            }
+        }, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        }, false);
+    }
 
     @Override
     public void onResume() {
         super.onResume();
         fragmentExploreLayoutBinding.getViewModel().getUsers();
     }
+
+
 }

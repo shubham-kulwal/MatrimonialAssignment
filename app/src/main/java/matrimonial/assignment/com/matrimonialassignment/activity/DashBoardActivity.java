@@ -12,7 +12,7 @@ import android.widget.TextView;
 import matrimonial.assignment.com.matrimonialassignment.R;
 import matrimonial.assignment.com.matrimonialassignment.baseClasses.BaseActivity;
 import matrimonial.assignment.com.matrimonialassignment.exploreModule.view.ExploreFragment;
-import matrimonial.assignment.com.matrimonialassignment.fragments.InboxFragment;
+import matrimonial.assignment.com.matrimonialassignment.fragments.VisitorFragment;
 import matrimonial.assignment.com.matrimonialassignment.shortListModule.view.ShortListFragment;
 import matrimonial.assignment.com.matrimonialassignment.interestModule.view.InterestFragment;
 import matrimonial.assignment.com.matrimonialassignment.profileModule.view.ProfileFragment;
@@ -25,10 +25,10 @@ import static matrimonial.assignment.com.matrimonialassignment.sharedPreference.
 
 public class DashBoardActivity extends BaseActivity implements View.OnClickListener {
 
-    private TextView explore_tv, inbox_tv, shortlist_tv, interest_tv, more_tv;
+    private TextView explore_tv, visitor_tv, shortlist_tv, interest_tv, more_tv;
     private ImageView logout_iv;
     private ExploreFragment exploreFragment;
-    private InboxFragment inboxFragment;
+    private VisitorFragment inboxFragment;
     private InterestFragment interestFragment;
     private ProfileFragment moreFragment;
     private ShortListFragment shortListFragment;
@@ -47,18 +47,18 @@ public class DashBoardActivity extends BaseActivity implements View.OnClickListe
         toolbar.setTitle("Explore");
         logout_iv = findViewById(R.id.logout_iv);
         explore_tv = findViewById(R.id.explore_tv);
-        inbox_tv = findViewById(R.id.inbox_tv);
+        visitor_tv = findViewById(R.id.visitor_tv);
         shortlist_tv = findViewById(R.id.shortlist_tv);
         interest_tv = findViewById(R.id.interest_tv);
         more_tv = findViewById(R.id.profile_tv);
         explore_tv.setOnClickListener(this);
         interest_tv.setOnClickListener(this);
-        inbox_tv.setOnClickListener(this);
+        visitor_tv.setOnClickListener(this);
         shortlist_tv.setOnClickListener(this);
         more_tv.setOnClickListener(this);
         logout_iv.setOnClickListener(this);
         exploreFragment = new ExploreFragment();
-        inboxFragment = new InboxFragment();
+        inboxFragment = new VisitorFragment();
         interestFragment = new InterestFragment();
         moreFragment = new ProfileFragment();
         shortListFragment = new ShortListFragment();
@@ -74,15 +74,15 @@ public class DashBoardActivity extends BaseActivity implements View.OnClickListe
                 loadExploreFragment();
                 break;
 
-            case R.id.inbox_tv:
-                toolbar.setTitle("Inbox");
-                inbox_tv.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            case R.id.visitor_tv:
+                toolbar.setTitle("Visitor");
+                visitor_tv.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 explore_tv.setBackgroundColor(getResources().getColor(R.color.white));
                 shortlist_tv.setBackgroundColor(getResources().getColor(R.color.white));
                 interest_tv.setBackgroundColor(getResources().getColor(R.color.white));
                 more_tv.setBackgroundColor(getResources().getColor(R.color.white));
 
-                inbox_tv.setTextColor(getResources().getColor(R.color.white));
+                visitor_tv.setTextColor(getResources().getColor(R.color.white));
                 explore_tv.setTextColor(getResources().getColor(R.color.black));
                 shortlist_tv.setTextColor(getResources().getColor(R.color.black));
                 interest_tv.setTextColor(getResources().getColor(R.color.black));
@@ -91,16 +91,16 @@ public class DashBoardActivity extends BaseActivity implements View.OnClickListe
                 break;
 
             case R.id.shortlist_tv:
-                toolbar.setTitle("Notification");
+                toolbar.setTitle("Shortlist");
                 shortlist_tv.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 explore_tv.setBackgroundColor(getResources().getColor(R.color.white));
-                inbox_tv.setBackgroundColor(getResources().getColor(R.color.white));
+                visitor_tv.setBackgroundColor(getResources().getColor(R.color.white));
                 interest_tv.setBackgroundColor(getResources().getColor(R.color.white));
                 more_tv.setBackgroundColor(getResources().getColor(R.color.white));
 
                 shortlist_tv.setTextColor(getResources().getColor(R.color.white));
                 explore_tv.setTextColor(getResources().getColor(R.color.black));
-                inbox_tv.setTextColor(getResources().getColor(R.color.black));
+                visitor_tv.setTextColor(getResources().getColor(R.color.black));
                 interest_tv.setTextColor(getResources().getColor(R.color.black));
                 more_tv.setTextColor(getResources().getColor(R.color.black));
                 loadFragment(shortListFragment);
@@ -110,13 +110,13 @@ public class DashBoardActivity extends BaseActivity implements View.OnClickListe
                 toolbar.setTitle("Interest");
                 interest_tv.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 explore_tv.setBackgroundColor(getResources().getColor(R.color.white));
-                inbox_tv.setBackgroundColor(getResources().getColor(R.color.white));
+                visitor_tv.setBackgroundColor(getResources().getColor(R.color.white));
                 shortlist_tv.setBackgroundColor(getResources().getColor(R.color.white));
                 more_tv.setBackgroundColor(getResources().getColor(R.color.white));
 
                 interest_tv.setTextColor(getResources().getColor(R.color.white));
                 explore_tv.setTextColor(getResources().getColor(R.color.black));
-                inbox_tv.setTextColor(getResources().getColor(R.color.black));
+                visitor_tv.setTextColor(getResources().getColor(R.color.black));
                 shortlist_tv.setTextColor(getResources().getColor(R.color.black));
                 more_tv.setTextColor(getResources().getColor(R.color.black));
                 loadFragment(interestFragment);
@@ -126,13 +126,13 @@ public class DashBoardActivity extends BaseActivity implements View.OnClickListe
                 toolbar.setTitle("Profile");
                 more_tv.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 explore_tv.setBackgroundColor(getResources().getColor(R.color.white));
-                inbox_tv.setBackgroundColor(getResources().getColor(R.color.white));
+                visitor_tv.setBackgroundColor(getResources().getColor(R.color.white));
                 shortlist_tv.setBackgroundColor(getResources().getColor(R.color.white));
                 interest_tv.setBackgroundColor(getResources().getColor(R.color.white));
 
                 more_tv.setTextColor(getResources().getColor(R.color.white));
                 explore_tv.setTextColor(getResources().getColor(R.color.black));
-                inbox_tv.setTextColor(getResources().getColor(R.color.black));
+                visitor_tv.setTextColor(getResources().getColor(R.color.black));
                 shortlist_tv.setTextColor(getResources().getColor(R.color.black));
                 interest_tv.setTextColor(getResources().getColor(R.color.black));
                 loadFragment(moreFragment);
@@ -176,13 +176,13 @@ public class DashBoardActivity extends BaseActivity implements View.OnClickListe
     private void loadExploreFragment() {
         toolbar.setTitle("Explore");
         explore_tv.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        inbox_tv.setBackgroundColor(getResources().getColor(R.color.white));
+        visitor_tv.setBackgroundColor(getResources().getColor(R.color.white));
         shortlist_tv.setBackgroundColor(getResources().getColor(R.color.white));
         interest_tv.setBackgroundColor(getResources().getColor(R.color.white));
         more_tv.setBackgroundColor(getResources().getColor(R.color.white));
 
         explore_tv.setTextColor(getResources().getColor(R.color.white));
-        inbox_tv.setTextColor(getResources().getColor(R.color.black));
+        visitor_tv.setTextColor(getResources().getColor(R.color.black));
         shortlist_tv.setTextColor(getResources().getColor(R.color.black));
         interest_tv.setTextColor(getResources().getColor(R.color.black));
         more_tv.setTextColor(getResources().getColor(R.color.black));

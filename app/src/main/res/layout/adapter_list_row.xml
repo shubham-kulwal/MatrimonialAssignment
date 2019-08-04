@@ -39,13 +39,27 @@
             android:orientation="vertical"
             android:weightSum="1">
 
-            <TextView
-                android:id="@+id/name"
+            <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Name: "
                 android:textColor="@color/black"
-                android:textSize="16dp" />
+                android:textSize="13dp"
+                android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -53,20 +67,38 @@
                 android:orientation="horizontal"
                 android:weightSum="1">
 
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Birth Date: "
+                    android:textColor="@color/black"
+                    android:textSize="13dp"
+                    android:gravity="center"/>
+
+
                 <TextView
                     android:id="@+id/dob"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Birth Date: 10-01-1995"
+                    android:text="10-01-1995"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:text="Age: "
+                    android:textColor="@color/black"
+                    android:textSize="13dp"
+                    android:gravity="center"/>
 
                 <TextView
                     android:id="@+id/age"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:text="Age: 24"
+                    android:text="24"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -78,7 +110,8 @@
                 android:layout_height="wrap_content"
                 android:text="Address: "
                 android:textColor="@color/black"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                android:visibility="gone"/>
 
 
             <TextView
@@ -88,12 +121,29 @@
                 android:layout_weight="0.85"
                 android:text="Contact: "
                 android:textColor="@color/black"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                android:visibility="gone"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right">
+
+
+                <RelativeLayout
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center|right">
+
+                    <ImageView
+                        android:id="@+id/express_interest_iv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/express_interest_white" />
+
+
+                </RelativeLayout>
+
 
                 <RelativeLayout
                     android:layout_width="30dp"

@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 
 import matrimonial.assignment.com.matrimonialassignment.R;
 
-public class InboxFragment extends Fragment {
+public class VisitorFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_inbox_layout, null);
+        return inflater.inflate(R.layout.fragment_visitor_layout, null);
     }
 }

@@ -31,19 +31,20 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         TextView name, dob, age, contact, address;
         CircleImageView profile_image;
         CardView cardLayout;
-        ImageView favourite_iv, block_iv;
+        ImageView favourite_iv, block_iv, express_interest_iv;
 
         public MyViewHolder(View view) {
             super(view);
-            name = (TextView) view.findViewById(R.id.name);
-            dob = (TextView) view.findViewById(R.id.dob);
-            contact = (TextView) view.findViewById(R.id.contact);
-            age = (TextView) view.findViewById(R.id.age);
-            address = (TextView) view.findViewById(R.id.address);
-            profile_image = (CircleImageView) view.findViewById(R.id.profile_image);
+            name = view.findViewById(R.id.name);
+            dob = view.findViewById(R.id.dob);
+            contact = view.findViewById(R.id.contact);
+            age = view.findViewById(R.id.age);
+            address = view.findViewById(R.id.address);
+            profile_image = view.findViewById(R.id.profile_image);
             cardLayout = view.findViewById(R.id.cardLayout);
             favourite_iv = view.findViewById(R.id.favourite_iv);
             block_iv = view.findViewById(R.id.block_iv);
+            express_interest_iv = view.findViewById(R.id.express_interest_iv);
         }
     }
 
@@ -67,24 +68,30 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final DataResponse dataResp = dataResponse.get(position);
-        holder.name.setText("Name: " + dataResp.getFirstName() + " " + dataResp.getMName() + " " + dataResp.getLName());
+        holder.name.setText(dataResp.getFirstName() + " " + dataResp.getMName() + " " + dataResp.getLName());
         holder.contact.setText("Contact: " + dataResp.getMobileNo());
-        holder.age.setText("Age: " + dataResp.getAge() + "");
-        //  holder.dob.setText("Birth Date: "+dataResp.getDateOfBirth());
+        holder.age.setText(dataResp.getAge() + "");
+        holder.dob.setText(dataResp.getDateOfBirthString());
         holder.address.setText("Address: " + dataResp.getAddress());
 
 
-            if (dataResponse.get(position).isShorlisted()) {
-                holder.favourite_iv.setBackground(context.getResources().getDrawable(R.drawable.heart_red));
-            } else {
-                holder.favourite_iv.setBackground(context.getResources().getDrawable(R.drawable.heart_white));
-            }
+        if (dataResponse.get(position).isShorlisted()) {
+            holder.favourite_iv.setBackground(context.getResources().getDrawable(R.drawable.heart_red));
+        } else {
+            holder.favourite_iv.setBackground(context.getResources().getDrawable(R.drawable.heart_white));
+        }
 
-            if (dataResponse.get(position).isBlocked()){
-                holder.block_iv.setBackground(context.getResources().getDrawable(R.drawable.block_user_red_icon));
-            }else {
-                holder.block_iv.setBackground(context.getResources().getDrawable(R.drawable.block_user_grey_icon));
-            }
+        if (dataResponse.get(position).isBlocked()) {
+            holder.block_iv.setBackground(context.getResources().getDrawable(R.drawable.block_user_red_icon));
+        } else {
+            holder.block_iv.setBackground(context.getResources().getDrawable(R.drawable.block_user_grey_icon));
+        }
+
+        if (dataResponse.get(position).isRequestSend()) {
+            holder.express_interest_iv.setBackground(context.getResources().getDrawable(R.drawable.express_interest_red));
+        } else {
+            holder.express_interest_iv.setBackground(context.getResources().getDrawable(R.drawable.express_interest_white));
+        }
 
         Glide.with(context).load(dataResp.getImg1()).into(holder.profile_image);
         holder.cardLayout.setOnClickListener(new View.OnClickListener() {
@@ -99,9 +106,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
             public void onClick(View v) {
                 if (!dataResponse.get(position).isShorlisted()) {
                     holder.favourite_iv.setTag("Favourite");
-                    onItemClickListener.onMarkAsFavouriteClick(dataResponse.get(position), v.getTag().toString(),position);
+                    onItemClickListener.onMarkAsFavouriteClick(dataResponse.get(position), v.getTag().toString(), position);
                 } else {
                     holder.favourite_iv.setTag("Unfavourite");
+                }
+
+            }
+        });
+
+        holder.express_interest_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!dataResponse.get(position).isRequestSend()) {
+                    onItemClickListener.onExpressInterestClick(dataResponse.get(position));
                 }
 
             }
@@ -113,12 +130,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         return dataResponse.size();
     }
 
-    public List<DataResponse> getDataResponse(){
+    public List<DataResponse> getDataResponse() {
         return dataResponse;
     }
 
-    public void setDataResponse(List<DataResponse> dataResponse){
-         this.dataResponse=dataResponse;
+    public void setDataResponse(List<DataResponse> dataResponse) {
+        this.dataResponse = dataResponse;
     }
 
     public void filterSearch(String searchQuery) {

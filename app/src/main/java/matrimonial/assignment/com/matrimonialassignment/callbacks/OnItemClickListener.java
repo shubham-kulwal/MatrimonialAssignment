@@ -6,4 +6,5 @@ public interface OnItemClickListener {
 
     void onClick(DataResponse dataResp);
     void onMarkAsFavouriteClick(DataResponse dataResp,String tag,int position);
+    void onExpressInterestClick(DataResponse dataResp);
 }
