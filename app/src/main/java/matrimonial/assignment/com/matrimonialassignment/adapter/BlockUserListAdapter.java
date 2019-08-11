@@ -58,15 +58,18 @@ public class BlockUserListAdapter extends RecyclerView.Adapter<BlockUserListAdap
     @Override
     public void onBindViewHolder(final BlockUserListAdapter.MyViewHolder holder, final int position) {
         final DataResponse dataResp = dataResponse.get(position);
-        holder.name.setText("Name: " + dataResp.getFirstName() + " " + " " + dataResp.getLName());
+        holder.name.setText(dataResp.getFirstName() + " " + " " + dataResp.getLName());
         holder.age.setText("Age: " + dataResp.getAge() + "");
         holder.address.setText("Address: " + dataResp.getCity());
-        if (dataResp.getDateOfBirth().contains("Date")){
-            holder.dob.setText("Birth Date: "+"10-06-2019");
-        }else {
-            holder.dob.setText("Requested Date: "+dataResp.getDateOfBirth());
+        /*if (dataResp.getDateOfBirth().contains("Date")) {
+            holder.dob.setText("Birth Date: " + "10-06-2019");
+        } else {
+            holder.dob.setText("Requested Date: " + dataResp.getDateOfBirth());
+        }*/
+        holder.dob.setText(dataResp.getDateOfBirthString());
+        if (dataResp.getImg1() != null && !dataResp.getImg1().contains("http://varmalavivah.com")) {
+            dataResp.setImg1("http://varmalavivah.com/" + dataResp.getImg1());
         }
-
         Glide.with(context).load(dataResp.getImg1()).into(holder.profile_image);
         /*holder.cardLayout.setOnClickListener(new View.OnClickListener() {
             @Override

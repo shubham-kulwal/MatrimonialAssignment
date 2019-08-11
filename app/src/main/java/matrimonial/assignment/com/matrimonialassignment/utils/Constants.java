@@ -23,6 +23,7 @@ public interface Constants {
         String EXPRESS_INTEREST_USER_API = "UserProfile/ExpressInterestAndroid";
         String GET_BLOCK_USER_LIST= "UserProfile/GetBlockUserDetails";
         String GET_SHORTLISTED_USER_LIST= "ShortList/GetShortlistUserAndroid";
+        String GET_MALE_USER_REQUEST_LIST= "Userprofile/GetUserRequestForMaleAndroid\n";
 
     }
 

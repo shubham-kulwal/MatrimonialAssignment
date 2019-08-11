@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import matrimonial.assignment.com.matrimonialassignment.R;
@@ -32,7 +31,7 @@ import static matrimonial.assignment.com.matrimonialassignment.utils.Constants.P
 
 public class ExploreFragment extends BaseFragment {
 
-    private FragmentExploreLayoutBinding fragmentExploreLayoutBinding;
+    private FragmentExploreLayoutBinding binding;
     public static DataResponse dataResponse;
     private ListAdapter mAdapter;
 
@@ -40,24 +39,24 @@ public class ExploreFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        fragmentExploreLayoutBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_explore_layout, null, false);
-        View view = fragmentExploreLayoutBinding.getRoot();
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_explore_layout, null, false);
+        View view = binding.getRoot();
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        fragmentExploreLayoutBinding.setViewModel(new ExploreViewModel());
-        fragmentExploreLayoutBinding.executePendingBindings();
+        binding.setViewModel(new ExploreViewModel());
+        binding.executePendingBindings();
         init();
     }
 
     private void init() {
-        observeProgressDialog(fragmentExploreLayoutBinding.getViewModel());
-        observeFinishActivity(fragmentExploreLayoutBinding.getViewModel());
+        observeProgressDialog(binding.getViewModel());
+        observeFinishActivity(binding.getViewModel());
         observeSearchResponse();
         sendDataToViewModel();
-        fragmentExploreLayoutBinding.searchEditText.addTextChangedListener(new TextWatcher() {
+        binding.searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -79,22 +78,22 @@ public class ExploreFragment extends BaseFragment {
     }
 
     private void observeSearchResponse() {
-        fragmentExploreLayoutBinding.getViewModel().getDataResponseMutableLiveData().observe(this, new Observer<List<DataResponse>>() {
+        binding.getViewModel().getDataResponseMutableLiveData().observe(this, new Observer<List<DataResponse>>() {
             @Override
             public void onChanged(@Nullable List<DataResponse> dataResponses) {
                 mAdapter = new ListAdapter(getContext(), dataResponses, onItemClickListener);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-                fragmentExploreLayoutBinding.recyclerView.setLayoutManager(mLayoutManager);
-                fragmentExploreLayoutBinding.recyclerView.setItemAnimator(new DefaultItemAnimator());
-                fragmentExploreLayoutBinding.recyclerView.setAdapter(mAdapter);
-                fragmentExploreLayoutBinding.getViewModel().setProgressDialog(DISMISS_PROGRESS_DIALOG);
-                fragmentExploreLayoutBinding.searchingLl.setVisibility(View.VISIBLE);
+                binding.recyclerView.setLayoutManager(mLayoutManager);
+                binding.recyclerView.setItemAnimator(new DefaultItemAnimator());
+                binding.recyclerView.setAdapter(mAdapter);
+                binding.getViewModel().setProgressDialog(DISMISS_PROGRESS_DIALOG);
+                binding.searchingLl.setVisibility(View.VISIBLE);
             }
         });
     }
 
     private void sendDataToViewModel() {
-        fragmentExploreLayoutBinding.getViewModel().setHeaders(getHeaders());
+        binding.getViewModel().setHeaders(getHeaders());
     }
 
     OnItemClickListener onItemClickListener = new OnItemClickListener() {
@@ -110,7 +109,7 @@ public class ExploreFragment extends BaseFragment {
             CommonMethods.showDialog(getActivity(), message, "YES", "CANCEL", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    fragmentExploreLayoutBinding.getViewModel().callShortlistUser(dataResp.getUserId());
+                    binding.getViewModel().callShortlistUser(dataResp.getUserId());
                 }
             }, new DialogInterface.OnClickListener() {
                 @Override
@@ -124,6 +123,11 @@ public class ExploreFragment extends BaseFragment {
         public void onExpressInterestClick(DataResponse dataResp) {
             showDialog("Are you sure you want to express interest to this user?", "Express Interest", dataResp.getUserId());
         }
+
+        @Override
+        public void blockUser(DataResponse dataResp) {
+            showDialog("Are you sure you want to block this user?", "Block", dataResp.getUserId());
+        }
     };
 
     private void showDialog(String message, final String positiveLabel, final int userId) {
@@ -131,7 +135,11 @@ public class ExploreFragment extends BaseFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                fragmentExploreLayoutBinding.getViewModel().callExpressInterestApi(userId);
+                if (positiveLabel.equalsIgnoreCase("Block")){
+                    binding.getViewModel().callBlockUserApi(userId);
+                }else {
+                    binding.getViewModel().callExpressInterestApi(userId);
+                }
             }
         }, new DialogInterface.OnClickListener() {
             @Override
@@ -144,7 +152,7 @@ public class ExploreFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        fragmentExploreLayoutBinding.getViewModel().getUsers();
+        binding.getViewModel().getUsers();
     }
 
 

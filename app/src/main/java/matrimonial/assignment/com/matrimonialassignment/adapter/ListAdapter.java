@@ -123,6 +123,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
 
             }
         });
+
+        holder.block_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!dataResponse.get(position).isBlocked()) {
+                    onItemClickListener.blockUser(dataResponse.get(position));
+                }
+            }
+        });
     }
 
     @Override

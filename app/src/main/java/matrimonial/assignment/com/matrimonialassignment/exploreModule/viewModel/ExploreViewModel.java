@@ -11,6 +11,7 @@ import matrimonial.assignment.com.matrimonialassignment.exploreModule.model.Expl
 import matrimonial.assignment.com.matrimonialassignment.exploreModule.view.ExploreFragment;
 import matrimonial.assignment.com.matrimonialassignment.service.ExpressInterestService;
 import matrimonial.assignment.com.matrimonialassignment.service.SearchUserApiService;
+import matrimonial.assignment.com.matrimonialassignment.serviceDtos.BlockUserAndroidDtos.BlockUserResponseObj;
 import matrimonial.assignment.com.matrimonialassignment.serviceDtos.ExpressInterestAndroid.ExpressInterestAndroidResponseObj;
 import matrimonial.assignment.com.matrimonialassignment.serviceDtos.Result;
 import matrimonial.assignment.com.matrimonialassignment.serviceDtos.searchUser.response.DataResponse;
@@ -38,6 +39,7 @@ public class ExploreViewModel extends BaseViewModel {
     private MutableLiveData<Boolean> isFavouriteLiveData;
     private ExpressInterestService expressInterestService;
     private final int EXPRESS_INTEREST_SERVICEID = 3;
+    private final int BLOCK_USER_SERVICEID = 4;
 
     public ExploreViewModel() {
         exploreModel = new ExploreModel();
@@ -106,6 +108,14 @@ public class ExploreViewModel extends BaseViewModel {
                     callSearchUsersApi();
                 }
                 break;
+
+            case BLOCK_USER_SERVICEID:
+                BlockUserResponseObj blockUserResponseObj = (BlockUserResponseObj) result.getObject();
+                if (blockUserResponseObj.getStatus()) {
+                    setToastMessage("Request Send");
+                    callSearchUsersApi();
+                }
+                break;
         }
     }
 
@@ -116,6 +126,13 @@ public class ExploreViewModel extends BaseViewModel {
         userDetailModel.setRequestedID(readInt(USER_ID));
         userDetailModel.setrequestTo(userId);
         expressInterestService.callExpressInterestApi(userDetailModel);
+    }
+
+    public void callBlockUserApi(int userId) {
+        exploreModel.setServiceID(BLOCK_USER_SERVICEID);
+        exploreModel.setRequestedID(readInt(USER_ID));
+        exploreModel.setrequestTo(userId);
+        searchUserApiService.callBlockUserApi(exploreModel);
     }
 
 

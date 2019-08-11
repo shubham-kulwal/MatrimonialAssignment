@@ -34,12 +34,12 @@ public class ViewImageActivity extends BaseActivity {
                 .load(imageUrl)
                 .into(userImage);
 
-        mScaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
+   //     mScaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
 
     }
 
 
-    @Override
+  /*  @Override
     public boolean onTouchEvent(MotionEvent event) {
         mScaleGestureDetector.onTouchEvent(event);
         return true;
@@ -56,5 +56,5 @@ public class ViewImageActivity extends BaseActivity {
             userImage.setScaleY(mScaleFactor);
             return true;
         }
-    }
+    }*/
 }

@@ -12,6 +12,15 @@ public class ExploreModel {
     private String PageSize;
     private Integer requestedID;
     private Integer userID;
+    private Integer requestTo;
+
+    public Integer getrequestTo() {
+        return requestTo;
+    }
+
+    public void setrequestTo(Integer userID) {
+        this.requestTo = userID;
+    }
 
     public Integer getUserID() {
         return userID;

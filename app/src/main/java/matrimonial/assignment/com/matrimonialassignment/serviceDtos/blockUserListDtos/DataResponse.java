@@ -86,7 +86,7 @@ public class DataResponse {
     @SerializedName("IdentificationMark")
     private Object mIdentificationMark;
     @SerializedName("Img1")
-    private Object mImg1;
+    private String mImg1;
     @SerializedName("Img2")
     private Object mImg2;
     @SerializedName("Income")
@@ -524,11 +524,11 @@ public class DataResponse {
         mIdentificationMark = identificationMark;
     }
 
-    public Object getImg1() {
+    public String getImg1() {
         return mImg1;
     }
 
-    public void setImg1(Object img1) {
+    public void setImg1(String img1) {
         mImg1 = img1;
     }
 

@@ -57,16 +57,20 @@ public class ShortListedUserAdapter  extends RecyclerView.Adapter<ShortListedUse
     @Override
     public void onBindViewHolder(final ShortListedUserAdapter.MyViewHolder holder, final int position) {
         final matrimonial.assignment.com.matrimonialassignment.serviceDtos.shortListedUserListDtos.DataResponse dataResp = dataResponse.get(position);
-        holder.name.setText("Name: " + dataResp.getFirstName() + " " + " " + dataResp.getLName());
+        holder.name.setText(dataResp.getFirstName() + " " + " " + dataResp.getLName());
         holder.age.setText("Age: " + dataResp.getAge() + "");
         holder.address.setText("Address: " + dataResp.getCity());
-        if (dataResp.getRequestDate().contains("Date")){
+        /*if (dataResp.getRequestDate().contains("Date")){
             holder.dob.setText("Requested Date: "+"10-06-2019");
         }else {
             holder.dob.setText("Requested Date: "+dataResp.getRequestDate());
+        }*/
+        holder.dob.setText(dataResp.getmDateOfBirthString());
+        if (dataResp.getImg1() != null && !dataResp.getImg1().contains("http://varmalavivah.com")) {
+            dataResp.setImg1("http://varmalavivah.com/" + dataResp.getImg1());
         }
-
         Glide.with(context).load(dataResp.getImg1()).into(holder.profile_image);
+
         /*holder.cardLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -9,13 +9,23 @@
             type="matrimonial.assignment.com.matrimonialassignment.splashScreenModule.viewModel.SplashScreenViewModel" />
     </data>
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/wedding_2"
         tools:context=".splashScreenModule.view.SplashScreenActivity"
         bind:callActivity="@{viewModel.callActivity}">
 
-    </LinearLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/wedding_2"
+            bind:layout_constraintStart_toStartOf="parent"
+            bind:layout_constraintTop_toTopOf="parent"
+            android:fitsSystemWindows="true"
+            bind:layout_constraintEnd_toEndOf="parent"
+            bind:layout_constraintBottom_toBottomOf="parent"
+            android:scaleType="centerCrop"/>
+
+    </android.support.constraint.ConstraintLayout>
 </layout>

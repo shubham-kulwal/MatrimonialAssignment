@@ -46,6 +46,16 @@ public class DataResponse {
     private Long mTotalRecords;
     @SerializedName("UserType")
     private String mUserType;
+    @SerializedName("DateOfBirthString")
+    private String mDateOfBirthString;
+
+    public String getmDateOfBirthString() {
+        return mDateOfBirthString;
+    }
+
+    public void setmDateOfBirthString(String mDateOfBirthString) {
+        this.mDateOfBirthString = mDateOfBirthString;
+    }
 
     public Long getAge() {
         return mAge;
